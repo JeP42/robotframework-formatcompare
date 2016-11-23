@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order.xsd">
+	<Order>
+		<Header>
+			<Number>4711abc</Number>
+			<Time>20110804113214</Time>
+			<Type>OTHER</Type>
+		</Header>
+		<Positions>
+			<Position>
+				<PosNumber>1</PosNumber>
+				<DeliveryDate>20110210000000</DeliveryDate>
+				<Quantity>10</Quantity>
+				<Price>1.99</Price>
+				<Comment>comment 123</Comment>
+			</Position>
+			<Position>
+				<PosNumber>2</PosNumber>
+				<DeliveryDate>20110211000000</DeliveryDate>
+				<Quantity>20</Quantity>
+				<Price>2.99</Price>
+				<Comment>comment 345</Comment>
+			</Position>
+		</Positions>
+	</Order>
+</Root>

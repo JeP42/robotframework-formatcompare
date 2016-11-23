@@ -1,0 +1,7 @@
+{1}.datecolEq;Order/Positions/Position[1]/DeliveryDate;DATE;=;;
+{1}.datecolGreater;Order/Positions/Position[1]/DeliveryDate;DATE;>;;
+{1}.datecolSmaller;Order/Positions/Position[1]/DeliveryDate;DATE;<;;
+{1}.datecolWithOption;Order/Positions/Position[1]/DeliveryDate;DATETIME;<;;SETTIMETOENDOFDAY
+{1}.datetimecolEq;Order/Header/Time;DATETIME;=;;
+{1}.datetimecolGreater;Order/Header/Time;DATETIME;>;;
+{1}.datetimecolSmaller;Order/Header/Time;DATETIME;<;;

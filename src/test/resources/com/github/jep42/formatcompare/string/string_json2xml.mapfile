@@ -1,0 +1,4 @@
+$.data[0].ordernumberEq;Order/Header/Number;STRING;=;;
+$.data[0].ordernumberUneq;Order/Header/Number;STRING;!=;;
+$.data[0].ordernumberContains;Order/Header/Number;STRING;&;;
+$.data[0].ordernumberContained;Order/Header/Number;STRING;$;;

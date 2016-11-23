@@ -1,0 +1,8 @@
+$.data[0].price.formatted;Order/Positions/Position[1]/Price;DECIMAL;=;;
+$.data[0].priceUneq.formatted;Order/Positions/Position[1]/Price;DECIMAL;!=;;
+$.data[0].priceGr.formatted;Order/Positions/Position[1]/Price;DECIMAL;<;;
+$.data[0].priceSma.formatted;Order/Positions/Position[1]/Price;DECIMAL;>;;
+$.data[0].quantity;Order/Positions/Position[1]/Quantity;INTEGER;=;;
+$.data[0].quantityUneq;Order/Positions/Position[1]/Quantity;INTEGER;!=;;
+$.data[0].quantityGr;Order/Positions/Position[1]/Quantity;INTEGER;<;;
+$.data[0].quantitySma;Order/Positions/Position[1]/Quantity;INTEGER;>;;

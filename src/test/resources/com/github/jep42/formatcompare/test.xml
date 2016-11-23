@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<TransmissionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="SO-Order-buyside.xsd">
+	<SO-AirSupply>
+		<ControlArea>
+			<Version>4.2</Version>
+			<SenderInfo>10007701;20;AirbusPI;PORT123;PGICLNT001</SenderInfo>
+			<ReceiverInfo>PORT456;20;LI;SUPPLYON</ReceiverInfo>
+			<ContentInfo>
+				<ExternalMessageID>100000000123</ExternalMessageID>
+				<CreationTimeStamp>20110804113214</CreationTimeStamp>
+			</ContentInfo>
+			<ProcessingInfo>
+				<InternalMessageID>168af670-da34-11d8-853d-deb30ac8890f</InternalMessageID>
+				<ReceivingTimeStamp>20110804113214</ReceivingTimeStamp>
+			</ProcessingInfo>
+			<Validation>
+				<Status>OK</Status>
+			</Validation>
+		</ControlArea>
+		<SO-Order direction="ORDER" type="CREATE">
+			<Header>
+				<PONumber>robot_TST_1920992402</PONumber>
+				<POHeaderTimestamp>20110804113214</POHeaderTimestamp>
+				<OrderType>OTHER</OrderType>
+				<OrderSubType>OTHER</OrderSubType>
+				<DocumentType>Manual</DocumentType>
+				<CompanyCode>BA01</CompanyCode>
+				<PurchasingOrganization>AP1</PurchasingOrganization>
+				<PurchasingGroup>49B</PurchasingGroup>
+				<Quotation>0011992458</Quotation>
+				<QuotationDate>20091119000000</QuotationDate>
+				<VATRegistrationNumber>FR1439334153</VATRegistrationNumber>
+				<CustomerReference>663991/HLC</CustomerReference>
+				<SupplierReference>CSN</SupplierReference>
+				<BusinessReferenceNumber>BAE/A320/PA</BusinessReferenceNumber>
+				<AgreementStartDate>19990104000000</AgreementStartDate>
+				<AgreementEndDate>20110104000000</AgreementEndDate>
+				<SalesPerson>J DELZ</SalesPerson>
+				<PaymentTerms>payment terms NEW</PaymentTerms>
+				<PaymentTermsCode>60JS</PaymentTermsCode>
+				<HeaderIncoterms>DDX</HeaderIncoterms>
+				<HeaderIncotermsDescription>USINE AIRBUS France</HeaderIncotermsDescription>
+				<POLanguage>FR</POLanguage>
+				<Currency>FUR</Currency>
+				<TotalPOAmount>0</TotalPOAmount>
+				<FittingSystem>Fitting system</FittingSystem>
+				<SourceSystem>DA_M_213</SourceSystem>
+				<ERPCreationDate>20060910000000</ERPCreationDate>
+				<POHeaderCreationUser>TO99999</POHeaderCreationUser>
+				<POHeaderTexts>
+					<POHeaderText>
+						<TextLine>(TCHF0001 a) Versandrichtlinie der Airbus Deutschland GmbH:</TextLine>
+						<TextLine>(TCHF0001 a) a) Richtig verpacken </TextLine>
+						<TextLine>(TCHF0001 a) b) Richtig senden </TextLine>
+						<TextLine>(TCHF0001 a) c) Rechtzeitig ankommen bei http://www.seeburger.de</TextLine>
+					</POHeaderText>
+					<POHeaderText category="Terms of Delivery TCHF0001">
+						<TextLine>(TCHF0001 a) d) Richtig verpacken </TextLine>
+						<TextLine>(TCHF0001 a) e) Richtig senden </TextLine>
+						<TextLine>(TCHF0001 a) f) Rechtzeitig ankommen </TextLine>
+					</POHeaderText>
+					<POHeaderText category="Terms of Payment TCHF0001">
+						<TextLine>(TCHF0001 a) TextLine 1 TCHF0001</TextLine>
+						<TextLine>(TCHF0001 a) a) line 2 TCHF0001</TextLine>
+						<TextLine>(TCHF0001 a) b) line 3 TCHF0001</TextLine>
+						<TextLine>(TCHF0001 a) c) line 4 TCHF0001</TextLine>
+						<TextLine>(TCHF0001 a) d) line 5 TCHF0001</TextLine>
+						<TextLine>(TCHF0001 a) e) line 6 TCHF0001</TextLine>
+					</POHeaderText>
+					<POHeaderText category="common">
+						<TextLine>(TCHF0001 a) On TCHF0001 this is a single line which is rather long and can be assumed to cause issues on the system once changed hence on change the changed value can no longer be displayed at once in the history table but needs to be displayed partially only.</TextLine>
+					</POHeaderText>
+				</POHeaderTexts>
+				<Addresses>
+					<Address>
+						<Type>INVOIC</Type>
+						<PartnerNumber>144444</PartnerNumber>
+						<Name1>AIRBUS INV G99 TCHF0001INV</Name1>
+						<Street>432863 PO-BOX : 28 62 01</Street>
+						<Street2>street2</Street2>
+						<PostalCode>28362</PostalCode>
+						<City>Bremen</City>
+						<Country>Germany</Country>
+						<ContactName>M. Mayer (TCHF)</ContactName>
+						<ContactPhone>36 0000432863</ContactPhone>
+					</Address>
+				</Addresses>
+			</Header>
+			<Positions>
+				<Position>
+					<OrderingOfficer>
+						<OrderingOfficerCode>32F</OrderingOfficerCode>
+						<OrderingOfficerName>W.DUPONT</OrderingOfficerName>
+						<OrderingOfficerPhone>(+33)0561123456</OrderingOfficerPhone>
+					</OrderingOfficer>
+			                  <Material>
+                         				<CustomerMaterialNumber>TESEC-MAT86</CustomerMaterialNumber>
+			                           <CustomerMaterialDescription>PILOT SEAT</CustomerMaterialDescription>
+                         				<SupplierMaterialNumber>34982-TZ--RE</SupplierMaterialNumber>
+                         				<SupplierMaterialDescription>PILSEAT</SupplierMaterialDescription>
+                         				<UnitOfMeasure>PCE</UnitOfMeasure>
+                    			</Material>
+                    			<PartnerRelation>
+                         				<CustomerControlPointId>101863</CustomerControlPointId>
+                         				<SupplierControlPointId>10006106</SupplierControlPointId>
+                        				<NetworklinkId>20080801</NetworklinkId>
+                         				<CustomerPlantCode>FAL</CustomerPlantCode>
+                         				<CustomerGroupCode>AIRB</CustomerGroupCode>
+                         				<SupplierNumber>600251</SupplierNumber>
+                   			</PartnerRelation>
+					<PositionLineNumber>010</PositionLineNumber>
+					<ScheduleLineNumber>10</ScheduleLineNumber>
+					<POLineTimeStamp>20100815000000</POLineTimeStamp>
+					<DeletionFlagScheduleLineLevel>false</DeletionFlagScheduleLineLevel>
+					<InitialStatus />
+					<Status />
+					<CollabRequestedDate>20110210000000</CollabRequestedDate>
+					<CollabRequestedQuantity>10</CollabRequestedQuantity>
+					<CollabPromisedDate>20110210000000</CollabPromisedDate>
+					<CollabPromisedQuantity>10</CollabPromisedQuantity>
+					<CollabPrice>1628.99</CollabPrice>
+					<Comment>This is a simple import dummy commentt.</Comment>
+					<SupplierAcknowledgementNumber>SAN-1234</SupplierAcknowledgementNumber>
+					<ShippedQuantity>0</ShippedQuantity>
+					<FinalDeliveryFlag>false</FinalDeliveryFlag>
+					<ReceivedQuantity>0</ReceivedQuantity>
+					<CollabMode>4</CollabMode>
+					<AllowCollabOnDate>true</AllowCollabOnDate>
+					<AllowCollabOnQuantity>true</AllowCollabOnQuantity>
+					<AllowCollabOnPrice>false</AllowCollabOnPrice>
+					<AllowCollabOnComment>true</AllowCollabOnComment>
+					<AllowCollabOnSupplierAcknowledgementNo>true</AllowCollabOnSupplierAcknowledgementNo>
+					<SparesPriority>AOG</SparesPriority>
+					<KitHeader>false</KitHeader>
+					<KITComponent>false</KITComponent>
+					<MinDeliveryDate>20010420000000</MinDeliveryDate>
+					<MaxDeliveryDate>20130420000000</MaxDeliveryDate>
+					<MaxDeliveryDateInfo>20010420000000</MaxDeliveryDateInfo>
+					<MinQuantity>1</MinQuantity>
+					<MaxQuantity>9999999000</MaxQuantity>
+					<SalesOrder>353405</SalesOrder>
+					<SalesOrderLine>10</SalesOrderLine>
+					<PartNumber>P1235</PartNumber>
+					<QualityContractNumber>AUK/SA/30318</QualityContractNumber>
+					<BaseOfUnit>1</BaseOfUnit>
+					<QuantityConversionDenominator>10.000</QuantityConversionDenominator>
+					<QuantityConversion>312</QuantityConversion>
+					<POLineDescription>0214265761_PFC-W1206-ABLF-16-1003-A_IRC</POLineDescription>
+					<TargetQuantity>20</TargetQuantity>
+					<Currency>EUR</Currency>
+					<OriginalPrice>16.88</OriginalPrice>
+					<PriceUnitOfMeasure>1</PriceUnitOfMeasure>
+					<ConfigurationVersion>ST3</ConfigurationVersion>
+					<ConfigurationStandard>NWA03</ConfigurationStandard>
+					<ConfigurationOption>AXOPT</ConfigurationOption>
+					<FinalDeliveryLocation>DA05G/A05SG05Q/MSG05</FinalDeliveryLocation>
+					<StorageLocation>SG05</StorageLocation>
+					<ElementaryDeliverySite>SAINT-MARTIN</ElementaryDeliverySite>
+					<MethodForManufacturing>2</MethodForManufacturing>
+					<ContractLine>10</ContractLine>
+					<ContractNumber>4600009542/00</ContractNumber>
+					<FittingCustomerMaterial>76967539</FittingCustomerMaterial>
+					<FittingPlace>8054</FittingPlace>
+					<CommodityGroup>GM3SW</CommodityGroup>
+					<SupplierAgreementNumber>SAgree1234</SupplierAgreementNumber>
+					<ProductionOrderNumber>67895555</ProductionOrderNumber>
+					<TrackingNumber>SER7681HP5</TrackingNumber>
+					<BatchNumberCustomer>BCUST1234</BatchNumberCustomer>
+					<BatchNumberSupplier>BSUP1234</BatchNumberSupplier>
+					<ConfirmationKey>ZL01</ConfirmationKey>
+					<CertificateType>BB</CertificateType>
+					<Incoterm>DDU</Incoterm>
+					<IncotermDescription>USINE AIRBUS France</IncotermDescription>
+					<SourceOfPublication>INIT</SourceOfPublication>
+					<LineSplitAllowed>true</LineSplitAllowed>
+					<QuantityTooLessTolerance>10</QuantityTooLessTolerance>
+					<QuantityTooManyTolerance>10</QuantityTooManyTolerance>
+					<UnlimitedOverdeliveryAllowed>false</UnlimitedOverdeliveryAllowed>
+					<SerialNumberRequired>false</SerialNumberRequired>
+					<BatchNumberRequired>false</BatchNumberRequired>
+					<ManufacturingDateRequired>false</ManufacturingDateRequired>
+					<ExpirationDateRequired>true</ExpirationDateRequired>
+					<CertificationTypeRequired>false</CertificationTypeRequired>
+					<FirstKITDelivery>false</FirstKITDelivery>
+					<ERPPOScheduleLineCreationDate>20060911150000</ERPPOScheduleLineCreationDate>
+					<POLineTexts>
+						<POLineText category="Common">
+							<TextLine>(TCHF0001 a 010/10) Certificate type:</TextLine>
+							<TextLine>(TCHF0001 a 010/10) A02 Acceptance Test Report acc. Spec.</TextLine>
+							<TextLine>(TCHF0001 a 010/10) Part-No.: 887673 (SA)</TextLine>
+							<TextLine>(TCHF0001 a 010/10) Contract: TF18/389/01/85 see also http://www.pushkinsworld.de (just to be save)</TextLine>
+						</POLineText>
+						<POLineText category="Delivery Instructions">
+							<TextLine>(TCHF0001 a 010/10) Handle carefully. No upside down!</TextLine>
+						</POLineText>
+					</POLineTexts>
+					<ManufacturerList>
+						<Address>
+							<Type>MANUF</Type>
+							<PartnerNumber>180883</PartnerNumber>
+							<Name1>ALCOA FASTENING SYSTEMS TCHF0001M1</Name1>
+							<Street>BOULEVARD DU GRAND CASTAING 193</Street>
+							<PostalCode>31128</PostalCode>
+							<City>ROQUES SUR GARONNE PARIS</City>
+							<Country>France</Country>
+							<CountryCode>FR</CountryCode>
+							<ContactName>A. Bonifatius (TCHF)</ContactName>
+						</Address>
+						<Address>
+							<Type>MANUF</Type>
+							<PartnerNumber>180884</PartnerNumber>
+							<Name1>NUBLOVA INC. TCHF0001M2</Name1>
+							<Street>CHAMPS ELYSEES 222</Street>
+							<PostalCode>31333</PostalCode>
+							<City>PARIS</City>
+							<Country>France</Country>
+							<CountryCode>FR</CountryCode>
+							<ContactName>A. Hofelot (TCHF)</ContactName>
+						</Address>
+					</ManufacturerList>
+					<Addresses>
+						<Address>
+							<Type>SHIPTO</Type>
+							<PartnerNumber>144499</PartnerNumber>
+							<Name1>AIRBUS  - Magasin Simualteur G05 TCHF00011010ST</Name1>
+							<Street>QUAI DA05G - LDSG05</Street>
+							<Street2>street2</Street2>
+							<PostalCode>31770</PostalCode>
+							<City>COLOMIERS</City>
+							<Country>France</Country>
+							<CountryCode>FR</CountryCode>
+							<ContactName>A. Sigoncour (TCHF)</ContactName>
+						</Address>
+					</Addresses>
+				</Position>
+			</Positions>
+		</SO-Order>
+	</SO-AirSupply>
+</TransmissionEnvelope>

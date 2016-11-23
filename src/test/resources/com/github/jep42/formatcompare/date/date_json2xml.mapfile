@@ -1,0 +1,7 @@
+$.data[0].datecolEq;Order/Positions/Position[1]/DeliveryDate;DATE;=;;
+$.data[0].datecolGreater;Order/Positions/Position[1]/DeliveryDate;DATE;>;;
+$.data[0].datecolSmaller;Order/Positions/Position[1]/DeliveryDate;DATE;<;;
+$.data[0].datecolWithOption;Order/Positions/Position[1]/DeliveryDate;DATETIME;<;;SETTIMETOENDOFDAY
+$.data[0].datetimecolEq;Order/Header/Time;DATETIME;=;;
+$.data[0].datetimecolGreater;Order/Header/Time;DATETIME;>;;
+$.data[0].datetimecolSmaller;Order/Header/Time;DATETIME;<;;

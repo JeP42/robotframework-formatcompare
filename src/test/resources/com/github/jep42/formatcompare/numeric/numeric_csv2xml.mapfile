@@ -1,0 +1,8 @@
+{1}.price;Order/Positions/Position[1]/Price;DECIMAL;=;;
+{1}.price2;Order/Positions/Position[1]/Price;DECIMAL;!=;;
+{1}.priceGreater;Order/Positions/Position[1]/Price;DECIMAL;<;;
+{1}.priceSmaller;Order/Positions/Position[1]/Price;DECIMAL;>;;
+{1}.quantityEq;Order/Positions/Position[1]/Quantity;INTEGER;=;;
+{1}.quantityUneq;Order/Positions/Position[1]/Quantity;INTEGER;!=;;
+{1}.quantityGr;Order/Positions/Position[1]/Quantity;INTEGER;<;;
+{1}.quantitySm;Order/Positions/Position[1]/Quantity;INTEGER;>;;

@@ -1,0 +1,9 @@
+{
+	"data": [{
+		"ordernumberEq": "4711abc",
+		"ordernumberUneq": "4711abcd",
+		"ordernumberContains": "AA4711abcBB",
+		"ordernumberContained": "4711"
+	}]
+}
+

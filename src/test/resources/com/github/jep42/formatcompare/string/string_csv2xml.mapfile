@@ -1,0 +1,4 @@
+{1}.ordernumberEq;Order/Header/Number;STRING;=;;
+{1}.ordernumberUneq;Order/Header/Number;STRING;!=;;
+{1}.ordernumberContains;Order/Header/Number;STRING;&;;
+{1}.ordernumberContained;Order/Header/Number;STRING;$;;
