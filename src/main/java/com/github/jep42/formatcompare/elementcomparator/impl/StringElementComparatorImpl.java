@@ -1,46 +1,46 @@
-package com.github.jep42.formatcompare.formatcomparator.impl;
+package com.github.jep42.formatcompare.elementcomparator.impl;
 
+import com.github.jep42.formatcompare.elementcomparator.api.AbstractElementComparator;
 import com.github.jep42.formatcompare.fieldmapper.api.FieldMapping;
-import com.github.jep42.formatcompare.formatcomparator.api.AbstractDataElementVerifier;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
-import com.github.jep42.formatcompare.util.DataVerifierException;
-import com.github.jep42.formatcompare.valuecomparator.ValueComparatorFactory;
-import com.github.jep42.formatcompare.valuecomparator.api.AssertionException;
-import com.github.jep42.formatcompare.valuecomparator.api.ValueComparator;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
+import com.github.jep42.formatcompare.valueasserter.ValueAsserterFactory;
+import com.github.jep42.formatcompare.valueasserter.api.AssertionException;
+import com.github.jep42.formatcompare.valueasserter.api.ValueAsserter;
 import com.github.jep42.formatcompare.valueparser.ValueParserFactory;
 import com.github.jep42.formatcompare.valueparser.api.ValueParser;
 
-public class StringElementVerifierImpl extends AbstractDataElementVerifier {
+public class StringElementComparatorImpl extends AbstractElementComparator {
 
 	private String m;
 
 	private String s;
 
 
-	public StringElementVerifierImpl(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
+	public StringElementComparatorImpl(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
 		super(mapping, master, slave);
 	}
 
 	@Override
-	protected void getValues() throws DataVerifierException {
+	protected void getValues() throws FormatComparatorException {
 		this.m = this.masterFormatHandler.getStringValueWith(this.fieldMapping.getMasterSelector());
     	this.s = this.slaveFormatHandler.getStringValueWith(this.fieldMapping.getSlaveSelector());
 	}
 
 	@Override
-	protected void parseValues() throws DataVerifierException {
+	protected void parseValues() throws FormatComparatorException {
 		ValueParser<String> valueParser = ValueParserFactory.getValueParserForString();
 		this.m = valueParser.parseValue(this.m, this.fieldMapping.getMasterOptions(), this.masterFormatHandler.getUserContext());
 		this.s = valueParser.parseValue(this.s, this.fieldMapping.getSlaveOptions(), this.slaveFormatHandler.getUserContext());
 	}
 
 	@Override
-	protected void assertValues() throws DataVerifierException {
-		ValueComparator<String> valueComparator = ValueComparatorFactory.getValueComparatorForString();
+	protected void assertValues() throws FormatComparatorException {
+		ValueAsserter<String> valueComparator = ValueAsserterFactory.getValueComparatorForString();
     	try {
 			valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());
 		} catch (AssertionException e) {
-			throw new DataVerifierException(String.format(ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
+			throw new FormatComparatorException(String.format(ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
 		}
 	}
 }

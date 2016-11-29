@@ -1,10 +1,10 @@
-package com.github.jep42.formatcompare.formatcomparator.api;
+package com.github.jep42.formatcompare.elementcomparator.api;
 
 import com.github.jep42.formatcompare.fieldmapper.api.FieldMapping;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
-import com.github.jep42.formatcompare.util.DataVerifierException;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
 
-public abstract class AbstractDataElementVerifier implements DataElementVerifier {
+public abstract class AbstractElementComparator implements ElementComparator {
 
 	protected FieldMapping fieldMapping;
 
@@ -13,15 +13,15 @@ public abstract class AbstractDataElementVerifier implements DataElementVerifier
 	protected FormatHandler slaveFormatHandler;
 
 
-	public AbstractDataElementVerifier(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
+	public AbstractElementComparator(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
 		this.initialize(mapping, master, slave);
 	}
 
-	protected abstract void getValues() throws DataVerifierException;
+	protected abstract void getValues() throws FormatComparatorException;
 
-	protected abstract void parseValues() throws DataVerifierException;
+	protected abstract void parseValues() throws FormatComparatorException;
 
-	protected abstract void assertValues() throws DataVerifierException;
+	protected abstract void assertValues() throws FormatComparatorException;
 
 	@Override
 	public void initialize(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
@@ -31,7 +31,7 @@ public abstract class AbstractDataElementVerifier implements DataElementVerifier
 	}
 
 	@Override
-	public void verify() throws DataVerifierException {
+	public void compare() throws FormatComparatorException {
 		this.getValues();
 
 		this.parseValues();

@@ -1,12 +1,10 @@
-package com.github.jep42.formatcompare.valuecomparator.impl;
+package com.github.jep42.formatcompare.valueasserter.impl;
 
-import java.math.BigDecimal;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
+import com.github.jep42.formatcompare.valueasserter.api.AssertionException;
+import com.github.jep42.formatcompare.valueasserter.api.ValueAsserter;
 
-import com.github.jep42.formatcompare.util.DataVerifierException;
-import com.github.jep42.formatcompare.valuecomparator.api.AssertionException;
-import com.github.jep42.formatcompare.valuecomparator.api.ValueComparator;
-
-public class BigDecimalValueComparatorImpl implements ValueComparator<BigDecimal> {
+public class IntegerAsserterImpl implements ValueAsserter<Integer> {
 
 	public static final String CONDITION_EQUAL = "=";
 
@@ -17,8 +15,8 @@ public class BigDecimalValueComparatorImpl implements ValueComparator<BigDecimal
 	public static final String CONDITION_SMALLER = "<";
 
 	@Override
-	public void assertCondition(BigDecimal masterValue, BigDecimal slaveValue, String condition)
-			throws AssertionException, DataVerifierException {
+	public void assertCondition(Integer masterValue, Integer slaveValue, String condition)
+			throws AssertionException, FormatComparatorException {
 
 		if (CONDITION_EQUAL.equals(condition)) {
 			if (!(masterValue.compareTo(slaveValue) == 0)) {
@@ -37,7 +35,7 @@ public class BigDecimalValueComparatorImpl implements ValueComparator<BigDecimal
 				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
 			}
 		} else {
-			throw new DataVerifierException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "DECIMAL", condition));
+			throw new FormatComparatorException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "INTEGER", condition));
 		}
 
 	}

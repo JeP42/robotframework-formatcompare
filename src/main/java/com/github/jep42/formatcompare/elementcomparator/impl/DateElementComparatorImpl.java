@@ -1,41 +1,41 @@
-package com.github.jep42.formatcompare.formatcomparator.impl;
+package com.github.jep42.formatcompare.elementcomparator.impl;
 
 import java.util.Date;
 
+import com.github.jep42.formatcompare.elementcomparator.api.AbstractElementComparator;
 import com.github.jep42.formatcompare.fieldmapper.api.FieldMapping;
-import com.github.jep42.formatcompare.formatcomparator.api.AbstractDataElementVerifier;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandlerException;
-import com.github.jep42.formatcompare.util.DataVerifierException;
-import com.github.jep42.formatcompare.valuecomparator.ValueComparatorFactory;
-import com.github.jep42.formatcompare.valuecomparator.api.AssertionException;
-import com.github.jep42.formatcompare.valuecomparator.api.ValueComparator;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
+import com.github.jep42.formatcompare.valueasserter.ValueAsserterFactory;
+import com.github.jep42.formatcompare.valueasserter.api.AssertionException;
+import com.github.jep42.formatcompare.valueasserter.api.ValueAsserter;
 import com.github.jep42.formatcompare.valueparser.ValueParserFactory;
 import com.github.jep42.formatcompare.valueparser.api.ValueParser;
 
-public class DateElementVerifierImpl extends AbstractDataElementVerifier {
+public class DateElementComparatorImpl extends AbstractElementComparator {
 
 	protected Date m;
 
 	protected Date s;
 
 
-	public DateElementVerifierImpl(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
+	public DateElementComparatorImpl(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
 		super(mapping, master, slave);
 	}
 
 	@Override
-	protected void getValues() throws DataVerifierException {
+	protected void getValues() throws FormatComparatorException {
 		try {
 			this.m = this.masterFormatHandler.getDateValueWith(this.fieldMapping.getMasterSelector());
 			this.s = this.slaveFormatHandler.getDateValueWith(this.fieldMapping.getSlaveSelector());
 		} catch (FormatHandlerException e) {
-			throw new DataVerifierException(String.format(GETVALUE_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
+			throw new FormatComparatorException(String.format(GETVALUE_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
 		}
 	}
 
 	@Override
-	protected void parseValues() throws DataVerifierException{
+	protected void parseValues() throws FormatComparatorException{
 		ValueParser<Date> valueParser = ValueParserFactory.getValueParserForDate();
 
 		this.m = valueParser.parseValue(this.m, this.fieldMapping.getMasterOptions(), this.masterFormatHandler.getUserContext());
@@ -43,12 +43,12 @@ public class DateElementVerifierImpl extends AbstractDataElementVerifier {
 	}
 
 	@Override
-	protected void assertValues() throws DataVerifierException {
-		ValueComparator<Date> valueComparator = ValueComparatorFactory.getValueComparatorForDate();
+	protected void assertValues() throws FormatComparatorException {
+		ValueAsserter<Date> valueComparator = ValueAsserterFactory.getValueComparatorForDate();
     	try {
     		valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());
     	} catch (AssertionException e) {
-			throw new DataVerifierException(String.format(ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
+			throw new FormatComparatorException(String.format(ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
 		}
 	}
 }

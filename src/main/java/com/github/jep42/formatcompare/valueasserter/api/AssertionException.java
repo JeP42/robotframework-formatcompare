@@ -1,4 +1,4 @@
-package com.github.jep42.formatcompare.valuecomparator.api;
+package com.github.jep42.formatcompare.valueasserter.api;
 
 public class AssertionException extends Exception {
 

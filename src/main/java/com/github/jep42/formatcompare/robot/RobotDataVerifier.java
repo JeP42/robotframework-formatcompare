@@ -15,10 +15,10 @@ import org.robotframework.javalib.annotation.ArgumentNames;
 import org.robotframework.javalib.annotation.RobotKeyword;
 import org.robotframework.javalib.annotation.RobotKeywords;
 
-import com.github.jep42.formatcompare.SimpleDataVerifier;
+import com.github.jep42.formatcompare.FormatComparator;
 import com.github.jep42.formatcompare.formathandler.FormatHandlerFactory;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
-import com.github.jep42.formatcompare.util.DataVerifierException;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
 
 @RobotKeywords
 public class RobotDataVerifier {
@@ -62,37 +62,37 @@ public class RobotDataVerifier {
 
 	@RobotKeyword("Verify Json Against Xml")
 	@ArgumentNames({"mapFilePath", "jsonPath", "xmlPath"})
-	public void verifyJsonAgainstXML(String mapFilePath, String json, String xml) throws DataVerifierException {
+	public void verifyJsonAgainstXML(String mapFilePath, String json, String xml) throws FormatComparatorException {
 		this.verifyConfig(CONFIG_JSON);
 		this.verifyConfig(CONFIG_XML);
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
+		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
 				this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
 	}
 
 	@RobotKeyword("Verify Json Against Xml")
 	@ArgumentNames({"mapFilePath", "jsonPath", "xmlPath"})
-	public void verifyJsonObjectAgainstXML(String mapFilePath, String json, String xml) throws DataVerifierException {
+	public void verifyJsonObjectAgainstXML(String mapFilePath, String json, String xml) throws FormatComparatorException {
 		this.verifyConfig(CONFIG_JSON);
 		this.verifyConfig(CONFIG_XML);
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
+		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
 				this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
 	}
 
 	@RobotKeyword("Verify Csv Against Xml")
 	@ArgumentNames({"mapFilePath", "csvPath", "xmlPath", "csvHeaderLineIndex"})
-	public void verifyCsvAgainstXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) throws DataVerifierException {
+	public void verifyCsvAgainstXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) throws FormatComparatorException {
 		this.verifyConfig(CONFIG_CSV);
 		this.verifyConfig(CONFIG_XML);
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
+		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
 				this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
 	}
 
 	@RobotKeyword("Verify Csv Against Json")
 	@ArgumentNames({"mapFilePath", "csvPath", "jsonPath", "csvHeaderLineIndex"})
-	public void verifyCsvAgainstJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) throws DataVerifierException {
+	public void verifyCsvAgainstJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) throws FormatComparatorException {
 		this.verifyConfig(CONFIG_CSV);
 		this.verifyConfig(CONFIG_JSON);
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
+		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
 				this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON));
 	}
 

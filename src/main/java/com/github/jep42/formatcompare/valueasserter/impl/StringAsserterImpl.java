@@ -1,10 +1,10 @@
-package com.github.jep42.formatcompare.valuecomparator.impl;
+package com.github.jep42.formatcompare.valueasserter.impl;
 
-import com.github.jep42.formatcompare.util.DataVerifierException;
-import com.github.jep42.formatcompare.valuecomparator.api.AssertionException;
-import com.github.jep42.formatcompare.valuecomparator.api.ValueComparator;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
+import com.github.jep42.formatcompare.valueasserter.api.AssertionException;
+import com.github.jep42.formatcompare.valueasserter.api.ValueAsserter;
 
-public class StringValueComparatorImpl implements ValueComparator<String> {
+public class StringAsserterImpl implements ValueAsserter<String> {
 
 	public static final String CONDITION_EQUAL = "=";
 
@@ -16,7 +16,7 @@ public class StringValueComparatorImpl implements ValueComparator<String> {
 
 
 	@Override
-	public void assertCondition(String masterValue, String slaveValue, String condition) throws AssertionException, DataVerifierException {
+	public void assertCondition(String masterValue, String slaveValue, String condition) throws AssertionException, FormatComparatorException {
 
 		if (CONDITION_EQUAL.equals(condition)) {
 			if (!masterValue.equals(slaveValue)) {
@@ -35,7 +35,7 @@ public class StringValueComparatorImpl implements ValueComparator<String> {
 				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
 			}
 		} else {
-			throw new DataVerifierException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "STRING", condition));
+			throw new FormatComparatorException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "STRING", condition));
 		}
 	}
 

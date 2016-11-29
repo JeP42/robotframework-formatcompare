@@ -1,12 +1,12 @@
-package com.github.jep42.formatcompare.valuecomparator.impl;
+package com.github.jep42.formatcompare.valueasserter.impl;
 
 import java.util.Date;
 
-import com.github.jep42.formatcompare.util.DataVerifierException;
-import com.github.jep42.formatcompare.valuecomparator.api.AssertionException;
-import com.github.jep42.formatcompare.valuecomparator.api.ValueComparator;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
+import com.github.jep42.formatcompare.valueasserter.api.AssertionException;
+import com.github.jep42.formatcompare.valueasserter.api.ValueAsserter;
 
-public class DateValueComparatorImpl implements ValueComparator<Date> {
+public class DateAsserterImpl implements ValueAsserter<Date> {
 
 	public static final String CONDITION_EQUAL = "=";
 
@@ -16,7 +16,7 @@ public class DateValueComparatorImpl implements ValueComparator<Date> {
 
 
 	@Override
-	public void assertCondition(Date masterValue, Date slaveValue, String condition) throws AssertionException, DataVerifierException {
+	public void assertCondition(Date masterValue, Date slaveValue, String condition) throws AssertionException, FormatComparatorException {
 
 		if (CONDITION_EQUAL.equals(condition)) {
 			if (!masterValue.equals(slaveValue)) {
@@ -31,7 +31,7 @@ public class DateValueComparatorImpl implements ValueComparator<Date> {
 				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
 			}
 		} else {
-			throw new DataVerifierException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "DATE/TIME", condition));
+			throw new FormatComparatorException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "DATE/TIME", condition));
 		}
 	}
 

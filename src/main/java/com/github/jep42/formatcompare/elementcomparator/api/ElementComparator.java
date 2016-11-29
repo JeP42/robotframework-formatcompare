@@ -1,10 +1,10 @@
-package com.github.jep42.formatcompare.formatcomparator.api;
+package com.github.jep42.formatcompare.elementcomparator.api;
 
 import com.github.jep42.formatcompare.fieldmapper.api.FieldMapping;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
-import com.github.jep42.formatcompare.util.DataVerifierException;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
 
-public interface DataElementVerifier {
+public interface ElementComparator {
 
 	static final String ASSERTION_ERROR_MESSAGE = "An exception occured while asserting field mapping %s. Message: %s";
 
@@ -12,6 +12,6 @@ public interface DataElementVerifier {
 
 	void initialize(FieldMapping mapping, FormatHandler master, FormatHandler slave);
 
-	void verify() throws DataVerifierException;
+	void compare() throws FormatComparatorException;
 
 }

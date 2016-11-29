@@ -15,7 +15,7 @@ import com.github.jep42.formatcompare.formathandler.FormatHandlerFactory;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
 
 
-public class SimpleDataVerifierTest {
+public class FormatComparatorTest {
 
 	private static final String  TIMEZONE_PLUS_ONE_SHORT = "GMT+01:00";
 
@@ -50,7 +50,7 @@ public class SimpleDataVerifierTest {
 		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
 		FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_CSV, DATE_FORMAT_PATTERN_DE_CSV, NUMBER_FORMAT_PATTERN_DE_CSV);
 
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class SimpleDataVerifierTest {
 		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
 		FormatHandler formatHandlerForJSON = FormatHandlerFactory.getFormatHandlerForJson(jsonString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_JSON, DATE_FORMAT_PATTERN_DE_JSON, NUMBER_FORMAT_PATTERN_DE_JSON);
 
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class SimpleDataVerifierTest {
 		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
 		FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_CSV, DATE_FORMAT_PATTERN_DE_CSV, NUMBER_FORMAT_PATTERN_DE_CSV);
 
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class SimpleDataVerifierTest {
 		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
 		FormatHandler formatHandlerForJSON = FormatHandlerFactory.getFormatHandlerForJson(jsonString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_JSON, DATE_FORMAT_PATTERN_DE_JSON, NUMBER_FORMAT_PATTERN_DE_JSON);
 
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
 	}
 
 
@@ -99,7 +99,7 @@ public class SimpleDataVerifierTest {
 		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
 		FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_CSV, DATE_FORMAT_PATTERN_DE_CSV, NUMBER_FORMAT_PATTERN_DE_CSV);
 
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public class SimpleDataVerifierTest {
 		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
 		FormatHandler formatHandlerForJSON = FormatHandlerFactory.getFormatHandlerForJson(jsonString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_JSON, DATE_FORMAT_PATTERN_DE_JSON, NUMBER_FORMAT_PATTERN_DE_JSON);
 
-		SimpleDataVerifier.createVerifier().verify(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
 	}
 
 
