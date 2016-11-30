@@ -1,0 +1,1 @@
+java -jar robotframework-formatcompare-remoteserver-0.0.1-jar-with-dependencies.jar --port 8272

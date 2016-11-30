@@ -19,6 +19,14 @@ public final class FormatComparator {
         return new FormatComparator();
     }
 
+    /**
+     * Compares the formats represented by the given FormatHandlers via the given map file.
+     *
+     * @param mapFilePath
+     * @param masterFormatHandler
+     * @param slaveFormatHandler
+     * @throws FormatComparatorException
+     */
     public void compare(String mapFilePath, FormatHandler masterFormatHandler, FormatHandler slaveFormatHandler) throws FormatComparatorException {
         Iterator<FieldMapping> mappingIterator = FieldMapperFactory.getFieldMapper(mapFilePath).getFieldMappings().iterator();
         while (mappingIterator.hasNext()) {
