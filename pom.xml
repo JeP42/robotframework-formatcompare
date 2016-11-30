@@ -8,7 +8,7 @@
 
     <packaging>pom</packaging>
 
-	<name>robotframework-formatcompare</name>
+	<name>robotframework-formatcompare-reactor</name>
 	<description>Robot framework keywords to compare different data structures (csv, xml, json) via mapfiles</description>
 	<url>https://github.com/JeP42/robotframework-formatcompare</url>
 
