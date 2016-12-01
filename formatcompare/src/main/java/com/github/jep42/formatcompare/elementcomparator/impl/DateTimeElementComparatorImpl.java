@@ -12,7 +12,7 @@ public class DateTimeElementComparatorImpl extends DateElementComparatorImpl {
 	}
 
 	@Override
-	protected void getValues() throws FormatComparatorException {
+	protected void getValues() {
 		try {
 			this.m = this.masterFormatHandler.getDateTimeValueWith(this.fieldMapping.getMasterSelector());
 			this.s = this.slaveFormatHandler.getDateTimeValueWith(this.fieldMapping.getSlaveSelector());

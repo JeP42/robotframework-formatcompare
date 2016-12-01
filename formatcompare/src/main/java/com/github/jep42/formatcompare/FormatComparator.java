@@ -27,7 +27,7 @@ public final class FormatComparator {
      * @param slaveFormatHandler
      * @throws FormatComparatorException
      */
-    public void compare(String mapFilePath, FormatHandler masterFormatHandler, FormatHandler slaveFormatHandler) throws FormatComparatorException {
+    public void compare(String mapFilePath, FormatHandler masterFormatHandler, FormatHandler slaveFormatHandler) {
         Iterator<FieldMapping> mappingIterator = FieldMapperFactory.getFieldMapper(mapFilePath).getFieldMappings().iterator();
         while (mappingIterator.hasNext()) {
             FieldMapping mapping = mappingIterator.next();

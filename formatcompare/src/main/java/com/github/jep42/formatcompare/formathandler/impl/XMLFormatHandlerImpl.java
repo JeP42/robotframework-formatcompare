@@ -23,12 +23,12 @@ public class XMLFormatHandlerImpl extends AbstractFormatHandler {
 	}
 
 	@Override
-	public String getStringValueWith(String selector) throws FormatHandlerException {
+	public String getStringValueWith(String selector) {
 		return XMLAccessor.getXMLValue(xmlDocument, selector);
 	}
 
 	@Override
-	public Date getDateValueWith(String selector) throws FormatHandlerException {
+	public Date getDateValueWith(String selector) {
 		String value = XMLAccessor.getXMLValue(xmlDocument, selector);
 		try {
 			return DateHelper.getDateFromFormattedDateString(value, this.getUserContext().getDateFormat(), this.getUserContext().getTimezone());
@@ -38,7 +38,7 @@ public class XMLFormatHandlerImpl extends AbstractFormatHandler {
 	}
 
 	@Override
-	public Date getDateTimeValueWith(String selector) throws FormatHandlerException {
+	public Date getDateTimeValueWith(String selector) {
 		String value = XMLAccessor.getXMLValue(xmlDocument, selector);
 		try {
 			return DateHelper.getDateFromFormattedDateString(value, this.getUserContext().getDateTimeFormat(), this.getUserContext().getTimezone());
@@ -48,7 +48,7 @@ public class XMLFormatHandlerImpl extends AbstractFormatHandler {
 	}
 
 	@Override
-	public BigDecimal getDecimalValueWith(String selector) throws FormatHandlerException {
+	public BigDecimal getDecimalValueWith(String selector) {
 		String value = XMLAccessor.getXMLValue(xmlDocument, selector);
 		try {
 			return NumericHelper.getBigDecimalFromString(value, this.getUserContext().getNumberFormat());
@@ -58,7 +58,7 @@ public class XMLFormatHandlerImpl extends AbstractFormatHandler {
 	}
 
 	@Override
-	public Integer getIntegerValueWith(String selector) throws FormatHandlerException {
+	public Integer getIntegerValueWith(String selector) {
 		String value = XMLAccessor.getXMLValue(xmlDocument, selector);
 		try {
 			return new Integer(value);

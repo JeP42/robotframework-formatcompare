@@ -15,9 +15,7 @@ public abstract class NumericAsserterImpl<T> implements ValueAsserter<T> {
 	public static final String CONDITION_SMALLER = "<";
 
 	@Override
-	public void assertCondition(T masterValue, T slaveValue, String condition)
-			throws AssertionException, FormatComparatorException {
-
+	public void assertCondition(T masterValue, T slaveValue, String condition) throws AssertionException {
 		if (CONDITION_EQUAL.equals(condition)) {
 			equalCheck(masterValue, slaveValue, condition);
 		} else if (CONDITION_UNEQUAL.equals(condition)) {
@@ -29,7 +27,6 @@ public abstract class NumericAsserterImpl<T> implements ValueAsserter<T> {
 		} else {
 			throw new FormatComparatorException(String.format(ValueAsserterMessages.COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "DECIMAL", condition));
 		}
-
 	}
 
 	protected abstract void smallerCheck(T masterValue, T slaveValue, String condition) throws AssertionException;

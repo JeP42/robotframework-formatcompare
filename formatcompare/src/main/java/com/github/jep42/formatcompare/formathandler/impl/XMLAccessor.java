@@ -31,7 +31,7 @@ public final class XMLAccessor {
 	}
 
 
-	public static String getXMLValue(Document xmlDocument, String xmlElementXPath) throws FormatHandlerException {
+	public static String getXMLValue(Document xmlDocument, String xmlElementXPath) {
 		try {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			NodeList nodes = (NodeList)xPath.evaluate(xmlElementXPath, xmlDocument.getDocumentElement(), XPathConstants.NODESET);
@@ -46,7 +46,7 @@ public final class XMLAccessor {
 	}
 
 
-	public static Document getDOMFromXML(String xmlString) throws FormatHandlerException {
+	public static Document getDOMFromXML(String xmlString) {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		    DocumentBuilder builder = factory.newDocumentBuilder();

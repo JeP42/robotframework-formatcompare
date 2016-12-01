@@ -25,7 +25,7 @@ public class DecimalElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void getValues() throws FormatComparatorException {
+	protected void getValues() {
 		try {
 			this.m = this.masterFormatHandler.getDecimalValueWith(this.fieldMapping.getMasterSelector());
 			this.s = this.slaveFormatHandler.getDecimalValueWith(this.fieldMapping.getSlaveSelector());
@@ -42,7 +42,7 @@ public class DecimalElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void assertValues() throws FormatComparatorException {
+	protected void assertValues() {
 		ValueAsserter<BigDecimal> valueComparator = ValueAsserterFactory.getValueComparatorForDecimal();
     	try {
     		valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());

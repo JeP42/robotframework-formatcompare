@@ -16,7 +16,7 @@ public class DateAsserterImpl implements ValueAsserter<Date> {
 
 
 	@Override
-	public void assertCondition(Date masterValue, Date slaveValue, String condition) throws AssertionException, FormatComparatorException {
+	public void assertCondition(Date masterValue, Date slaveValue, String condition) throws AssertionException {
 		if (CONDITION_EQUAL.equals(condition)) {
 			checkEqual(masterValue, slaveValue, condition);
 		} else if (CONDITION_AFTER.equals(condition)) {

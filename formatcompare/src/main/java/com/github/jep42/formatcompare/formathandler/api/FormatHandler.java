@@ -9,14 +9,14 @@ public interface FormatHandler {
 
 	UserContext getUserContext();
 
-	String getStringValueWith(String selector) throws FormatHandlerException;
+	String getStringValueWith(String selector);
 
-	Date getDateValueWith(String selector)throws FormatHandlerException;
+	Date getDateValueWith(String selector);
 
-	Date getDateTimeValueWith(String masterSelector)throws FormatHandlerException;
+	Date getDateTimeValueWith(String masterSelector);
 
-	BigDecimal getDecimalValueWith(String selector)throws FormatHandlerException;
+	BigDecimal getDecimalValueWith(String selector);
 
-	Integer getIntegerValueWith(String selector)throws FormatHandlerException;
+	Integer getIntegerValueWith(String selector);
 
 }

@@ -10,6 +10,6 @@ public interface ElementComparator {
 
 	void initialize(FieldMapping mapping, FormatHandler master, FormatHandler slave);
 
-	void compare() throws FormatComparatorException;
+	void compare();
 
 }

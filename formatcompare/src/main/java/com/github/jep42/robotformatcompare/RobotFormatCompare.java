@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.github.jep42.formatcompare.FormatComparator;
 import com.github.jep42.formatcompare.formathandler.FormatHandlerFactory;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
-import com.github.jep42.formatcompare.util.FormatComparatorException;
 
 /**
  *
@@ -104,15 +103,13 @@ public class RobotFormatCompare {
 	 * - _json_: JSON object or path to JSON file
 	 * - _xml_: XML object or path to XML file
 	 *
-	 * Throws:
-	 * - _FormatComparatorException_
 	 *
 	 * Example:
 	 * | Verify Json Against XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
 	 *
 	 *
 	 */
-	public void verifyJsonAgainstXML(String mapFilePath, String json, String xml) throws FormatComparatorException {
+	public void verifyJsonAgainstXML(String mapFilePath, String json, String xml) {
 		this.verifyConfig(CONFIG_JSON);
 		this.verifyConfig(CONFIG_XML);
 		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
@@ -129,14 +126,12 @@ public class RobotFormatCompare {
 	 * - _xml_: XML object or path to XML file
 	 * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
      *
-     * Throws:
-	 * - _FormatComparatorException_
 	 *
 	 * Example:
 	 * | Verify Csv Against XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml |
 	 *
      */
-	public void verifyCsvAgainstXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) throws FormatComparatorException {
+	public void verifyCsvAgainstXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) {
 		this.verifyConfig(CONFIG_CSV);
 		this.verifyConfig(CONFIG_XML);
 		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
@@ -152,14 +147,12 @@ public class RobotFormatCompare {
 	 * - _json_: JSON object or path to JSON file
 	 * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
      *
-     * Throws:
-	 * - _FormatComparatorException_
 	 *
 	 * Example:
 	 * | Verify Csv Against Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json |
 	 *
 	 */
-	public void verifyCsvAgainstJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) throws FormatComparatorException {
+	public void verifyCsvAgainstJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) {
 		this.verifyConfig(CONFIG_CSV);
 		this.verifyConfig(CONFIG_JSON);
 		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
@@ -221,7 +214,7 @@ public class RobotFormatCompare {
 	}
 
 	private Map<String, String> getAsMap(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
-		Map<String, String> map = new ConcurrentHashMap<String, String>();
+		Map<String, String> map = new ConcurrentHashMap<>();
 		map.put(TIMEZONE, timezone);
 		map.put(DATETIMEFORMAT, dateTimeFormat);
 		map.put(DATEFORMAT, dateFormat);
@@ -243,7 +236,7 @@ public class RobotFormatCompare {
 		    }
 		    return sb.toString();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new RobotFormatCompareException(e);
 		}
 	}
 

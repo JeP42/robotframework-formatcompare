@@ -15,7 +15,7 @@ public final class FieldMapperFactory {
 	}
 
 
-	public static FieldMapper getFieldMapper(String mapFilePath) throws FormatComparatorException {
+	public static FieldMapper getFieldMapper(String mapFilePath) {
 		try {
 			return new DefaultFieldMapperImpl(mapFilePath);
 		} catch (InvalidMapfileException e) {

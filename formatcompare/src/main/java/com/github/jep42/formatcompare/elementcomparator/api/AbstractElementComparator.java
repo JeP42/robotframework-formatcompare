@@ -2,7 +2,6 @@ package com.github.jep42.formatcompare.elementcomparator.api;
 
 import com.github.jep42.formatcompare.fieldmapper.api.FieldMapping;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
-import com.github.jep42.formatcompare.util.FormatComparatorException;
 
 public abstract class AbstractElementComparator implements ElementComparator {
 
@@ -17,11 +16,11 @@ public abstract class AbstractElementComparator implements ElementComparator {
 		this.initialize(mapping, master, slave);
 	}
 
-	protected abstract void getValues() throws FormatComparatorException;
+	protected abstract void getValues();
 
-	protected abstract void parseValues() throws FormatComparatorException;
+	protected abstract void parseValues();
 
-	protected abstract void assertValues() throws FormatComparatorException;
+	protected abstract void assertValues();
 
 	@Override
 	public void initialize(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
@@ -31,7 +30,7 @@ public abstract class AbstractElementComparator implements ElementComparator {
 	}
 
 	@Override
-	public void compare() throws FormatComparatorException {
+	public void compare() {
 		this.getValues();
 
 		this.parseValues();

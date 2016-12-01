@@ -17,7 +17,7 @@ public final class ElementComparatorFactory {
 		super();
 	}
 
-	public static ElementComparator getElementComparatorFor(FieldMapping mapping, FormatHandler master, FormatHandler slave) throws FormatComparatorException {
+	public static ElementComparator getElementComparatorFor(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
 		if (FieldType.STRING.equals(mapping.getFieldType())) {
 			return new StringElementComparatorImpl(mapping, master, slave);
 		} else if (FieldType.DATETIME.equals(mapping.getFieldType())) {

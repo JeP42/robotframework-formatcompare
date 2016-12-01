@@ -23,7 +23,7 @@ public class IntegerElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void getValues() throws FormatComparatorException {
+	protected void getValues() {
 		try {
 			this.m = masterFormatHandler.getIntegerValueWith(fieldMapping.getMasterSelector());
 			this.s = slaveFormatHandler.getIntegerValueWith(fieldMapping.getSlaveSelector());
@@ -40,7 +40,7 @@ public class IntegerElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void assertValues() throws FormatComparatorException {
+	protected void assertValues() {
 		ValueAsserter<Integer> valueComparator = ValueAsserterFactory.getValueComparatorForInteger();
     	try {
     		valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());

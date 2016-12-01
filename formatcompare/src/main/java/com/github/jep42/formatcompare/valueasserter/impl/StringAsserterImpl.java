@@ -16,7 +16,7 @@ public class StringAsserterImpl implements ValueAsserter<String> {
 
 
 	@Override
-	public void assertCondition(String masterValue, String slaveValue, String condition) throws AssertionException, FormatComparatorException {
+	public void assertCondition(String masterValue, String slaveValue, String condition) throws AssertionException {
 		if (CONDITION_EQUAL.equals(condition)) {
 			checkEquals(masterValue, slaveValue, condition);
 		} else if (CONDITION_UNEQUAL.equals(condition)) {

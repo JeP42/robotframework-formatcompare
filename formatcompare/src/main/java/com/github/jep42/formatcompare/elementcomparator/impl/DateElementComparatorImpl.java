@@ -25,7 +25,7 @@ public class DateElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void getValues() throws FormatComparatorException {
+	protected void getValues() {
 		try {
 			this.m = this.masterFormatHandler.getDateValueWith(this.fieldMapping.getMasterSelector());
 			this.s = this.slaveFormatHandler.getDateValueWith(this.fieldMapping.getSlaveSelector());
@@ -35,7 +35,7 @@ public class DateElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void parseValues() throws FormatComparatorException{
+	protected void parseValues() {
 		ValueParser<Date> valueParser = ValueParserFactory.getValueParserForDate();
 
 		this.m = valueParser.parseValue(this.m, this.fieldMapping.getMasterOptions(), this.masterFormatHandler.getUserContext());
@@ -43,7 +43,7 @@ public class DateElementComparatorImpl extends AbstractElementComparator {
 	}
 
 	@Override
-	protected void assertValues() throws FormatComparatorException {
+	protected void assertValues() {
 		ValueAsserter<Date> valueComparator = ValueAsserterFactory.getValueComparatorForDate();
     	try {
     		valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());

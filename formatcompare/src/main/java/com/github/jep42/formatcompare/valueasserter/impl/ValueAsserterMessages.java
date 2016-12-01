@@ -6,4 +6,9 @@ public final class ValueAsserterMessages {
 
 	public static final String COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE = "The value comparator for %s does not support the condition: %s";
 
+	private ValueAsserterMessages() {
+		super();
+	}
+
+
 }
