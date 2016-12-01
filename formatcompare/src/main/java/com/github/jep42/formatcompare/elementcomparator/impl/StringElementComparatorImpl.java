@@ -40,7 +40,7 @@ public class StringElementComparatorImpl extends AbstractElementComparator {
     	try {
 			valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());
 		} catch (AssertionException e) {
-			throw new FormatComparatorException(String.format(ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
+			throw new FormatComparatorException(String.format(ElementComparatorMessages.ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
 		}
 	}
 }

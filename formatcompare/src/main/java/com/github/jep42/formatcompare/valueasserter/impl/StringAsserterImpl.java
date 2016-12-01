@@ -17,25 +17,41 @@ public class StringAsserterImpl implements ValueAsserter<String> {
 
 	@Override
 	public void assertCondition(String masterValue, String slaveValue, String condition) throws AssertionException, FormatComparatorException {
-
 		if (CONDITION_EQUAL.equals(condition)) {
-			if (!masterValue.equals(slaveValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkEquals(masterValue, slaveValue, condition);
 		} else if (CONDITION_UNEQUAL.equals(condition)) {
-			if (masterValue.equals(slaveValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkUnequal(masterValue, slaveValue, condition);
 		} else if (CONDITION_CONTAINS.equals(condition)) {
-			if (!masterValue.contains(slaveValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkContains(masterValue, slaveValue, condition);
 		} else if (CONDITION_CONTAINED.equals(condition)) {
-			if (!slaveValue.contains(masterValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkContained(masterValue, slaveValue, condition);
 		} else {
-			throw new FormatComparatorException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "STRING", condition));
+			throw new FormatComparatorException(String.format(ValueAsserterMessages.COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "STRING", condition));
+		}
+	}
+
+
+	private void checkContained(String masterValue, String slaveValue, String condition) throws AssertionException {
+		if (!slaveValue.contains(masterValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
+		}
+	}
+
+	private void checkContains(String masterValue, String slaveValue, String condition) throws AssertionException {
+		if (!masterValue.contains(slaveValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
+		}
+	}
+
+	private void checkUnequal(String masterValue, String slaveValue, String condition) throws AssertionException {
+		if (masterValue.equals(slaveValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
+		}
+	}
+
+	private void checkEquals(String masterValue, String slaveValue, String condition) throws AssertionException {
+		if (!masterValue.equals(slaveValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
 		}
 	}
 

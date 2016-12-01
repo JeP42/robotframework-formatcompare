@@ -3,8 +3,6 @@ package com.github.jep42.robotformatcompare;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -44,7 +42,7 @@ public class RobotFormatCompare {
 
 	private static final String CONFIG_XML = "XMl";
 
-	private Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<String, Map<String, String>>();
+	private Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
 
 	/**
 	 * Initialize Json Verifier
@@ -176,30 +174,27 @@ public class RobotFormatCompare {
 	}
 
 	private FormatHandler getFormatHandlerforJson(String json, String formatKey) {
-		FormatHandler formatHandler = FormatHandlerFactory.getFormatHandlerForJson(this.getContent(json),
+		return FormatHandlerFactory.getFormatHandlerForJson(this.getContent(json),
 				TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
 				this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
 				this.verfierConfigs.get(formatKey).get(DATEFORMAT),
 				this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
-		return formatHandler;
 	}
 
 	private FormatHandler getFormatHandlerforXml(String xml, String formatKey) {
-		FormatHandler formatHandler = FormatHandlerFactory.getFormatHandlerForXML(this.getContent(xml),
+		return FormatHandlerFactory.getFormatHandlerForXML(this.getContent(xml),
 				TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
 				this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
 				this.verfierConfigs.get(formatKey).get(DATEFORMAT),
 				this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
-		return formatHandler;
 	}
 
 	private FormatHandler getFormatHandlerforCsv(String csv, String formatKey, int headerLineIndex) {
-		FormatHandler formatHandler = FormatHandlerFactory.getFormatHandlerForCSV(this.getContent(csv), headerLineIndex,
+		return FormatHandlerFactory.getFormatHandlerForCSV(this.getContent(csv), headerLineIndex,
 				TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
 				this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
 				this.verfierConfigs.get(formatKey).get(DATEFORMAT),
 				this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
-		return formatHandler;
 	}
 
 
@@ -219,7 +214,7 @@ public class RobotFormatCompare {
 
 	private boolean isValidFilePath(String json) {
 		try {
-			return Files.exists(Paths.get(json));
+			return Paths.get(json).toFile().exists();
 		} catch (InvalidPathException e) {
 			return false;
 		}
@@ -237,10 +232,7 @@ public class RobotFormatCompare {
 	}
 
 	private String loadFile(String filePath) {
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(filePath));
-
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath)) ) {
 		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
 
@@ -252,18 +244,7 @@ public class RobotFormatCompare {
 		    return sb.toString();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		} finally {
-			this.closeStream(br);
 		}
 	}
 
-	private void closeStream(Reader reader) {
-		try {
-			if (reader != null) {
-				reader.close();
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
 }

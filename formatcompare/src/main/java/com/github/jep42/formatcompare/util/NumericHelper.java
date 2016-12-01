@@ -5,7 +5,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 
-public class NumericHelper {
+public final class NumericHelper {
+
+	private NumericHelper() {
+		super();
+	}
 
 	public static BigDecimal getBigDecimalFromString(String numericValue, String numberFormat) throws ParseException {
 

@@ -22,7 +22,7 @@ public class DefaultFieldMapperImpl implements FieldMapper {
 
 	private static final int NUMBER_OF_CONFIG_OPTIONS = 6;
 
-	List<FieldMapping> fieldMappings = new ArrayList<FieldMapping>();
+	List<FieldMapping> fieldMappings = new ArrayList<>();
 
 
 	public DefaultFieldMapperImpl(String mapFilePath) throws InvalidMapfileException {

@@ -9,7 +9,7 @@ public interface FormatHandler {
 
 	UserContext getUserContext();
 
-	String getStringValueWith(String selector);
+	String getStringValueWith(String selector) throws FormatHandlerException;
 
 	Date getDateValueWith(String selector)throws FormatHandlerException;
 

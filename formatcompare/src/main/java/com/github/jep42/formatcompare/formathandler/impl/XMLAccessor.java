@@ -17,6 +17,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.github.jep42.formatcompare.formathandler.api.FormatHandlerException;
+
 public final class XMLAccessor {
 
 	private static final String UNEXPECTED_EXCEPTION_MESSAGE = "An unexpected exception occured while processing XML. message: %s";
@@ -29,22 +31,22 @@ public final class XMLAccessor {
 	}
 
 
-	public static String getXMLValue(Document xmlDocument, String xmlElementXPath) {
+	public static String getXMLValue(Document xmlDocument, String xmlElementXPath) throws FormatHandlerException {
 		try {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			NodeList nodes = (NodeList)xPath.evaluate(xmlElementXPath, xmlDocument.getDocumentElement(), XPathConstants.NODESET);
 			if (nodes == null || nodes.getLength() == 0) {
-				throw new RuntimeException(String.format(EXCEPTION_ELEMENT_NOT_FOUND, xmlElementXPath));
+				throw new FormatHandlerException(String.format(EXCEPTION_ELEMENT_NOT_FOUND, xmlElementXPath));
 			}
 
 			return nodes.item(0).getFirstChild().getNodeValue();
 		} catch (XPathExpressionException e) {
-			throw new RuntimeException(String.format(UNEXPECTED_EXCEPTION_MESSAGE, e.getMessage()), e);
+			throw new FormatHandlerException(String.format(UNEXPECTED_EXCEPTION_MESSAGE, e.getMessage()), e);
 		}
 	}
 
 
-	public static Document getDOMFromXML(String xmlString) {
+	public static Document getDOMFromXML(String xmlString) throws FormatHandlerException {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		    DocumentBuilder builder = factory.newDocumentBuilder();
@@ -52,7 +54,7 @@ public final class XMLAccessor {
 		    return builder.parse(stream);
 
 		} catch (ParserConfigurationException | SAXException | IOException e) {
-			throw new RuntimeException(String.format(UNEXPECTED_EXCEPTION_MESSAGE, e.getMessage()), e);
+			throw new FormatHandlerException(String.format(UNEXPECTED_EXCEPTION_MESSAGE, e.getMessage()), e);
 		}
 	}
 

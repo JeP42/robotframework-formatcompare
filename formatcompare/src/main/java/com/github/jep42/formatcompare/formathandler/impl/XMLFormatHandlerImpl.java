@@ -17,13 +17,13 @@ public class XMLFormatHandlerImpl extends AbstractFormatHandler {
 
 	private Document xmlDocument;
 
-	public XMLFormatHandlerImpl(String content, TimeZone timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+	public XMLFormatHandlerImpl(String content, TimeZone timezone, String dateTimeFormat, String dateFormat, String numberFormat)  {
 		super(timezone, dateTimeFormat, dateFormat, numberFormat);
 		this.xmlDocument = XMLAccessor.getDOMFromXML(content);
 	}
 
 	@Override
-	public String getStringValueWith(String selector) {
+	public String getStringValueWith(String selector) throws FormatHandlerException {
 		return XMLAccessor.getXMLValue(xmlDocument, selector);
 	}
 

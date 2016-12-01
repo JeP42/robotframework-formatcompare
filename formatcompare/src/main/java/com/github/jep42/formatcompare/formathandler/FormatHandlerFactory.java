@@ -7,8 +7,13 @@ import com.github.jep42.formatcompare.formathandler.impl.CSVFormatHandlerImpl;
 import com.github.jep42.formatcompare.formathandler.impl.JsonFormatHandlerImpl;
 import com.github.jep42.formatcompare.formathandler.impl.XMLFormatHandlerImpl;
 
-public class FormatHandlerFactory {
+public final class FormatHandlerFactory {
 
+
+
+	private FormatHandlerFactory() {
+		super();
+	}
 
 	public static FormatHandler getFormatHandlerForCSV(String content, int headerLineIndex, TimeZone timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
 		return new CSVFormatHandlerImpl(content, headerLineIndex, timezone, dateTimeFormat, dateFormat, numberFormat);

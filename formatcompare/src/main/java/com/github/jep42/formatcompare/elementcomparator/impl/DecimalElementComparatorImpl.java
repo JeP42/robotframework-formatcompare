@@ -30,7 +30,7 @@ public class DecimalElementComparatorImpl extends AbstractElementComparator {
 			this.m = this.masterFormatHandler.getDecimalValueWith(this.fieldMapping.getMasterSelector());
 			this.s = this.slaveFormatHandler.getDecimalValueWith(this.fieldMapping.getSlaveSelector());
 		} catch (FormatHandlerException e) {
-			throw new FormatComparatorException(String.format(GETVALUE_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
+			throw new FormatComparatorException(String.format(ElementComparatorMessages.GETVALUE_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class DecimalElementComparatorImpl extends AbstractElementComparator {
     	try {
     		valueComparator.assertCondition(this.m, this.s, this.fieldMapping.getCondition());
 		} catch (AssertionException e) {
-			throw new FormatComparatorException(String.format(ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
+			throw new FormatComparatorException(String.format(ElementComparatorMessages.ASSERTION_ERROR_MESSAGE, this.fieldMapping.toString(), e.getMessage()), e);
 		}
 	}
 }

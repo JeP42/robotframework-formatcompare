@@ -17,22 +17,33 @@ public class DateAsserterImpl implements ValueAsserter<Date> {
 
 	@Override
 	public void assertCondition(Date masterValue, Date slaveValue, String condition) throws AssertionException, FormatComparatorException {
-
 		if (CONDITION_EQUAL.equals(condition)) {
-			if (!masterValue.equals(slaveValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkEqual(masterValue, slaveValue, condition);
 		} else if (CONDITION_AFTER.equals(condition)) {
-			if (!masterValue.after(slaveValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkAfter(masterValue, slaveValue, condition);
 		} else if (CONDITION_BEFORE.equals(condition)) {
-			if (!masterValue.before(slaveValue)) {
-				throw new AssertionException(String.format(ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
-			}
+			checkBefore(masterValue, slaveValue, condition);
 		} else {
-			throw new FormatComparatorException(String.format(COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "DATE/TIME", condition));
+			throw new FormatComparatorException(String.format(ValueAsserterMessages.COMPARATOR_NOT_SUPPORTED_ERROR_MESSAGE, "DATE/TIME", condition));
 		}
 	}
 
+
+	private void checkBefore(Date masterValue, Date slaveValue, String condition) throws AssertionException {
+		if (!masterValue.before(slaveValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
+		}
+	}
+
+	private void checkAfter(Date masterValue, Date slaveValue, String condition) throws AssertionException {
+		if (!masterValue.after(slaveValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
+		}
+	}
+
+	private void checkEqual(Date masterValue, Date slaveValue, String condition) throws AssertionException {
+		if (!masterValue.equals(slaveValue)) {
+			throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
+		}
+	}
 }

@@ -17,6 +17,7 @@ public interface FieldMapping {
 
 	List<String> getSlaveOptions();
 
+	@Override
 	String toString();
 
 	/**

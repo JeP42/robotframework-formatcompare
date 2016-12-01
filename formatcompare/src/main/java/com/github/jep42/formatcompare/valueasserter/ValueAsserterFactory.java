@@ -9,7 +9,11 @@ import com.github.jep42.formatcompare.valueasserter.impl.DateAsserterImpl;
 import com.github.jep42.formatcompare.valueasserter.impl.IntegerAsserterImpl;
 import com.github.jep42.formatcompare.valueasserter.impl.StringAsserterImpl;
 
-public class ValueAsserterFactory {
+public final class ValueAsserterFactory {
+
+	private ValueAsserterFactory() {
+		super();
+	}
 
 
 	public static ValueAsserter<String> getValueComparatorForString() {

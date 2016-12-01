@@ -1,8 +1,11 @@
 package com.github.jep42.formatcompare.util;
 
-public class FormatComparatorException extends Exception {
+public class FormatComparatorException extends RuntimeException {
 
 	private static final long serialVersionUID = -5627407761128362031L;
+
+
+
 
 	public FormatComparatorException(String message) {
 		super(message);

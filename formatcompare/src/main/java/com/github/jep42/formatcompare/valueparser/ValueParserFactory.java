@@ -9,8 +9,11 @@ import com.github.jep42.formatcompare.valueparser.impl.DateValueParserImpl;
 import com.github.jep42.formatcompare.valueparser.impl.IntegerValueParserImpl;
 import com.github.jep42.formatcompare.valueparser.impl.StringValueParserImpl;
 
-public class ValueParserFactory {
+public final class ValueParserFactory {
 
+	private ValueParserFactory() {
+		super();
+	}
 
 	public static ValueParser<String> getValueParserForString() {
 		return new StringValueParserImpl();

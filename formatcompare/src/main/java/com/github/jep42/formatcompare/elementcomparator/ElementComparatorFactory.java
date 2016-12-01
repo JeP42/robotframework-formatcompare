@@ -11,7 +11,11 @@ import com.github.jep42.formatcompare.fieldmapper.api.FieldType;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
 import com.github.jep42.formatcompare.util.FormatComparatorException;
 
-public class ElementComparatorFactory {
+public final class ElementComparatorFactory {
+
+	private ElementComparatorFactory() {
+		super();
+	}
 
 	public static ElementComparator getElementComparatorFor(FieldMapping mapping, FormatHandler master, FormatHandler slave) throws FormatComparatorException {
 		if (FieldType.STRING.equals(mapping.getFieldType())) {
