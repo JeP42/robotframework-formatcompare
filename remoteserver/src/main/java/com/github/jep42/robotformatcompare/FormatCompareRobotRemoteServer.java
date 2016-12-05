@@ -1,4 +1,4 @@
-package com.github.jep42.formatcompare;
+package com.github.jep42.robotformatcompare;
 
 
 import org.robotframework.remoteserver.RemoteServer;

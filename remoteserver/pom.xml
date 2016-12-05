@@ -24,7 +24,7 @@
 				  <configuration>
 				    <archive>
 				      <manifest>
-				        <mainClass>com.github.jep42.formatcompare.FormatCompareRobotRemoteServer.java</mainClass>
+				        <mainClass>com.github.jep42.robotformatcompare.FormatCompareRobotRemoteServer.java</mainClass>
 				      </manifest>
 				    </archive>
 				    <descriptorRefs>
