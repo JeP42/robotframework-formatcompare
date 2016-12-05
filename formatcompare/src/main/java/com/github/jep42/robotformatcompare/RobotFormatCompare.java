@@ -44,7 +44,7 @@ public class RobotFormatCompare {
 	private Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
 
 	/**
-	 * Initialize Json Verifier
+	 * Initialize Json format handler
 	 *
 	 * Arguments:
 	 * - _timezone_: User timezone to parse date strings.
@@ -53,15 +53,15 @@ public class RobotFormatCompare {
 	 * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
 	 *
 	 * Example:
-	 * | Initialize Json Verifier | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+	 * | Initialize Json Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
 	 *
 	 */
-	public void initializeJsonVerifier(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+	public void initializeJsonFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
 		verfierConfigs.put(CONFIG_JSON, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
 	}
 
 	/**
-	 * Initialize Csv Verifier
+	 * Initialize Csv format handler
 	 *
 	 * Arguments:
 	 * - _timezone_: User timezone to parse date strings.
@@ -70,15 +70,15 @@ public class RobotFormatCompare {
 	 * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
 	 *
 	 * Example:
-	 * | Initialize Csv Verifier | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+	 * | Initialize Csv Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
 	 *
 	 */
-	public void initializeCsvVerifier(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+	public void initializeCsvFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
 		verfierConfigs.put(CONFIG_CSV, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
 	}
 
 	/**
-	 * Initialize Xml Verifier
+	 * Initialize Xml format handler
 	 *
 	 * Arguments:
 	 * - _timezone_: User timezone to parse date strings.
@@ -87,16 +87,16 @@ public class RobotFormatCompare {
 	 * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
 	 *
 	 * Example:
-	 * | Initialize Xml Verifier | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+	 * | Initialize Xml Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
 	 *
 	 */
-	public void initializeXmlVerifier(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+	public void initializeXmlFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
 		verfierConfigs.put(CONFIG_XML, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
 	}
 
 	/**
 	 *
-	 * Verify Json Against Xml
+	 * Verify Json With Xml
 	 *
 	 * Arguments:
 	 * - _mapFilePath_: Path to the map file
@@ -105,11 +105,11 @@ public class RobotFormatCompare {
 	 *
 	 *
 	 * Example:
-	 * | Verify Json Against XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
+	 * | Verify Json With XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
 	 *
 	 *
 	 */
-	public void verifyJsonAgainstXML(String mapFilePath, String json, String xml) {
+	public void compareJsonWithXML(String mapFilePath, String json, String xml) {
 		this.verifyConfig(CONFIG_JSON);
 		this.verifyConfig(CONFIG_XML);
 		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
@@ -118,7 +118,7 @@ public class RobotFormatCompare {
 
 
     /**
-     * Verify Csv Against Xml
+     * Verify Csv With Xml
      *
      * Arguments:
 	 * - _mapFilePath_: Path to the map file
@@ -128,10 +128,10 @@ public class RobotFormatCompare {
      *
 	 *
 	 * Example:
-	 * | Verify Csv Against XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml |
+	 * | Verify Csv With XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml |
 	 *
      */
-	public void verifyCsvAgainstXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) {
+	public void compareCsvWithXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) {
 		this.verifyConfig(CONFIG_CSV);
 		this.verifyConfig(CONFIG_XML);
 		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
@@ -139,7 +139,7 @@ public class RobotFormatCompare {
 	}
 
 	/**
-	 * Verify Csv Against Json
+	 * Verify Csv With Json
 	 *
 	 * Arguments:
 	 * - _mapFilePath_: Path to the map file
@@ -149,10 +149,10 @@ public class RobotFormatCompare {
      *
 	 *
 	 * Example:
-	 * | Verify Csv Against Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json |
+	 * | Verify Csv With Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json |
 	 *
 	 */
-	public void verifyCsvAgainstJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) {
+	public void compareCsvWithJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) {
 		this.verifyConfig(CONFIG_CSV);
 		this.verifyConfig(CONFIG_JSON);
 		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
