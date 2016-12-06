@@ -15,10 +15,102 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
 
 /**
  *
- * This library provides keywords to compare different data structures (csv, xml, json) via mapfiles
+ * This library provides keywords to compare different data structures (csv, xml, json) via mapfiles.
+ * The mapfile specifies the elements which are compared with each other and defines certain rules for this compare operation.
  *
- * Decimal number format pattern
- * The format pattern always consists of three characters: the first specifies the grouping separator, the second the decimal separator and the last the number of decimal digits.
+ * == MapFile format ==
+ *
+ * The format of the mapfile is CSV and has the following structure:
+ * _*<masterElementSelectorExpression>;<slaveElementSelectorExpression>;<dataType>;<condition>;<masterOptions>;<slaveOptions>*_
+ *
+ * === Selector Expressions ===
+ *
+ * The _<masterElementSelectorExpression>_ selects an element in the master file/structure. This element is mapped to the element
+ * in the slave file/structure which can be selected via _<slaveElementSelectorExpression>_. The concrete selector expression depends
+ * on the format of the file:
+ *
+ * | =Format= | =Selector= | =Reference= |
+ * | XML | XPath expression | https://www.w3.org/TR/xpath/ |
+ * | JSON | JsonPath expression | http://goessner.net/articles/JsonPath/ |
+ * | CSV | EasyCSVMap selector expression | https://github.com/JeP42/robotframework-easycsvmap |
+ *
+ * === Data Types ===
+ *
+ * A data type has to be specified for the mapped elements. The following data types are supported:
+ *
+ * | =Data type= | =Description= |
+ * | STRING | Compares values as strings |
+ * | INTEGER | Compares values as integers |
+ * | DECIMAL | Compares values as decimal values considering the given decimal number format pattern |
+ * | DATE | Compares values as date values considering the given date pattern |
+ * | DATETIME | Compares values as date values considering the given date-time pattern |
+ *
+ * === Condition ===
+ *
+ * Depending on the format there are different conditions supported for the compare operation. The evaluation of the specified
+ * condition must be "true" otherwise the compare operation will fail.
+ *
+ * _Conditions for data type *STRING*_
+ *
+ * | =Compare operation= | =Meaning= | =Description= |
+ * | = | equal | values are checked to be equal (case sensitive) |
+ * | != | unequal | values are checked to be unequal |
+ * | & | contains | the value of the master element must contain the element of the slave element. Therefore, the slave value is a substring of the master value. |
+ * | $ | contained | the value of the slave element must contain the element of the master element. Therefore, the master value is a substring of the slave value. |
+ *
+ *
+ * _Conditions for numeric data types *DECIMAL* and *INTEGER*_
+ *
+ * | =Compare operation= | =Meaning= | =Description= |
+ * | = | equal | values are checked to be equal |
+ * | != | unequal | values are checked to be unequal |
+ * | < | smaller | The master value is checked to be smaller than the slave value (master < slave) |
+ * | > | greater | The master value is checked to be greater than the slave value (master > slave) |
+ *
+ *
+ * _Conditions for date data types *DATE* and *DATETIME*_
+ *
+ * | =Compare operation= | =Meaning= | =Description= |
+ * | = | equal | Both date values are checked to be equal considering the given date pattern |
+ * | < | before | The master date value is checked to be before the slave slave date value (master < slave) |
+ * | > | after | The master date value is checked to be after the slave value (master > slave) |
+ *
+ *
+ * === Options ===
+ *
+ * Options can be used to apply specific data modifications to the values before these are compared with each other. For the
+ * moment there is only one option supported.
+ *
+ * | =Option= | =Valid for data type= | =Description= |
+ * | SETTIMETOENDOFDAY | DATE, DATETIME | Set the time part of the given date value to 23:59:59:999 |
+ *
+ * == Patterns ==
+ *
+ * Patterns are passed to the format handler components to allow comparing values even if these values have deviating formats. E.g. in XML the
+ * date format "20040516" may be used whereas in JSON the date is formatted as "2004-05-16". To be able to compare these values properly the date pattern must be
+ * known so that the comparator can parse date values from the date strings and use these date values for comparison.
+ *
+ *
+ * === Date and Time patterns ===
+ *
+ * For date and time patterns the standard Java pattern syntax is used. Details about the syntax can be found in the Javadocs: https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+ * Here some examples:
+ *
+ * | =Pattern= | =Formatted date= |
+ * | dd.MM.yyyy | 16.05.2004  |
+ * | yyyyMMdd | 20040516  |
+ * | dd-MM-yyyy HH:mm:ss | 16-05-2004 12:34:56 |
+ *
+ *
+ * === Decimal number format pattern ===
+ *
+ * The format pattern consists of three characters enclosed in double quotes. The first character specifies the grouping separator, the second the decimal separator and the last the number of decimal digits: _*"<groupingSeparator><decimalSeparator><numberOfDecimalDigits>"*_.
+ * Here some examples for the numeric values 1234,42:
+ *
+ * | =Pattern= | =Formatted number= |
+ * | ".,2" | 1.234,42 |
+ * | ",.2" | 1,234.42 |
+ * | " ,2" | 1 234,42 |
  *
  */
 public class RobotFormatCompare {
