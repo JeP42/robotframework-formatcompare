@@ -26,19 +26,29 @@ public final class DateHelper {
 	}
 
 	public static Date setTimeToEndOfDay(Date date, TimeZone timezone) {
-		//log timezone and result of c here!!!
-		Calendar c = Calendar.getInstance(timezone);
-		System.out.println("[debug] Timezone: " + timezone.toString());
-		System.out.println("[debug] c.getTimeInMillis(): " + c.getTimeInMillis());
-		System.out.println("[debug] c.getTime().toString(): " + c.getTime().toString());
+//		//log timezone and result of c here!!!
+//		Calendar c = Calendar.getInstance(timezone);
+//		System.out.println("[debug] Timezone: " + timezone.toString());
+//		System.out.println("[debug] c.getTimeInMillis(): " + c.getTimeInMillis());
+//		//c.getTime() ==> the time in UTC *not* in timezone
+//		System.out.println("[debug] c.getTime().toString(): " + c.getTime().toString());
+//		c.setTime(date);
+//		c.set(Calendar.HOUR_OF_DAY, 23);
+//		c.set(Calendar.MINUTE, 59);
+//		c.set(Calendar.SECOND, 59);
+//		c.set(Calendar.MILLISECOND, 999);
+//		System.out.println("[debug] c.getTimeInMillis(): " + c.getTimeInMillis());
+//		System.out.println("[debug] c.getTime().toString(): " + c.getTime().toString());
+//		System.out.println("[debug] ret " + new Date(c.getTimeInMillis() + timezone.getOffset(c.getTimeInMillis())));
+//		return new Date(c.getTimeInMillis() + timezone.getOffset(c.getTimeInMillis()));
+
+
+		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		c.set(Calendar.HOUR_OF_DAY, 23);
 		c.set(Calendar.MINUTE, 59);
 		c.set(Calendar.SECOND, 59);
 		c.set(Calendar.MILLISECOND, 999);
-		System.out.println("[debug] c.getTimeInMillis(): " + c.getTimeInMillis());
-		System.out.println("[debug] c.getTime().toString(): " + c.getTime().toString());
-		//return new Date(c.getTimeInMillis());
 		return c.getTime();
 	}
 }
