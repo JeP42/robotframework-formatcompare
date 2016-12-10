@@ -90,29 +90,29 @@ public class FormatComparatorTest {
 	}
 
 
-//	@Test
-//	public void verify_csv2xml_date() throws Exception {
-//		String csvString = this.getFile("com/github/jep42/formatcompare/date/date_test.csv");
-//		String xmlString = this.getFile("com/github/jep42/formatcompare/date/date_test.xml");
-//		String mapFilePath = this.getMapFilePath("com/github/jep42/formatcompare/date/date_csv2xml.mapfile");
-//
-//		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
-//		FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_CSV, DATE_FORMAT_PATTERN_DE_CSV, NUMBER_FORMAT_PATTERN_DE_CSV);
-//
-//		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
-//	}
+	@Test
+	public void verify_csv2xml_date() throws Exception {
+		String csvString = this.getFile("com/github/jep42/formatcompare/date/date_test.csv");
+		String xmlString = this.getFile("com/github/jep42/formatcompare/date/date_test.xml");
+		String mapFilePath = this.getMapFilePath("com/github/jep42/formatcompare/date/date_csv2xml.mapfile");
 
-//	@Test
-//	public void verify_json2xml_date() throws Exception {
-//		String jsonString = this.getFile("com/github/jep42/formatcompare/date/date_test.json");
-//		String xmlString = this.getFile("com/github/jep42/formatcompare/date/date_test.xml");
-//		String mapFilePath = this.getMapFilePath("com/github/jep42/formatcompare/date/date_json2xml.mapfile");
-//
-//		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
-//		FormatHandler formatHandlerForJSON = FormatHandlerFactory.getFormatHandlerForJson(jsonString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_JSON, DATE_FORMAT_PATTERN_DE_JSON, NUMBER_FORMAT_PATTERN_DE_JSON);
-//
-//		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
-//	}
+		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
+		FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_CSV, DATE_FORMAT_PATTERN_DE_CSV, NUMBER_FORMAT_PATTERN_DE_CSV);
+
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+	}
+
+	@Test
+	public void verify_json2xml_date() throws Exception {
+		String jsonString = this.getFile("com/github/jep42/formatcompare/date/date_test.json");
+		String xmlString = this.getFile("com/github/jep42/formatcompare/date/date_test.xml");
+		String mapFilePath = this.getMapFilePath("com/github/jep42/formatcompare/date/date_json2xml.mapfile");
+
+		FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
+		FormatHandler formatHandlerForJSON = FormatHandlerFactory.getFormatHandlerForJson(jsonString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_JSON, DATE_FORMAT_PATTERN_DE_JSON, NUMBER_FORMAT_PATTERN_DE_JSON);
+
+		FormatComparator.createComparator().compare(mapFilePath, formatHandlerForJSON, formatHandlerForXML);
+	}
 
 
 	private String getFile(String ressource) {
