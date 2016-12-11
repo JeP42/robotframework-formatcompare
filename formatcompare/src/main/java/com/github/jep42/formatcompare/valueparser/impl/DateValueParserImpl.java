@@ -15,7 +15,7 @@ public class DateValueParserImpl implements ValueParser<Date> {
 	public Date parseValue(Date value, List<String> options, UserContext userContext) {
 
 		if (options.contains(OPTION_SET_TIME_TO_END_OF_DAY)) {
-			return DateHelper.setTimeToEndOfDay(value, userContext.getTimezone());
+			return DateHelper.setTimeToEndOfDay(value);
 		}
 
 		return value;

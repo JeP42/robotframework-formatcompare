@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.robotframework.javalib.util.StringUtils;
+
 import com.github.jep42.formatcompare.FormatComparator;
 import com.github.jep42.formatcompare.formathandler.FormatHandlerFactory;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
@@ -115,25 +117,27 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  */
 public class RobotFormatCompare {
 
+	private static final String MESSAGE_INVALID_PATTERN = "The given %s pattern is invalid: %s";
+
 	public static final String ROBOT_LIBRARY_VERSION = "0.1";
 
 	public static final String ROBOT_LIBRARY_SCOPE = "GLOBAL";
 
-	private static final String NUMBERFORMAT = "NUMBERFORMAT";
+	static final String NUMBERFORMAT = "NUMBERFORMAT";
 
-	private static final String DATEFORMAT = "DATEFORMAT";
+	static final String DATEFORMAT = "DATEFORMAT";
 
-	private static final String DATETIMEFORMAT = "DATETIMEFORMAT";
+	static final String DATETIMEFORMAT = "DATETIMEFORMAT";
 
-	private static final String TIMEZONE = "TIMEZONE";
+	static final String TIMEZONE = "TIMEZONE";
 
-	private static final String CONFIG_JSON = "JSON";
+	static final String CONFIG_JSON = "JSON";
 
-	private static final String CONFIG_CSV = "CSV";
+	static final String CONFIG_CSV = "CSV";
 
-	private static final String CONFIG_XML = "XMl";
+	static final String CONFIG_XML = "XMl";
 
-	private Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
+	Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
 
 	/**
 	 * Initialize Json format handler
@@ -149,7 +153,34 @@ public class RobotFormatCompare {
 	 *
 	 */
 	public void initializeJsonFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+		validate(dateTimeFormat, dateFormat, numberFormat);
 		verfierConfigs.put(CONFIG_JSON, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
+	}
+
+
+	/**
+	 * Simple validation of format patterns
+	 *
+	 * @param dateTimeFormat
+	 * @param dateFormat
+	 * @param numberFormat
+	 */
+	private void validate(String dateTimeFormat, String dateFormat, String numberFormat) {
+		if (!StringUtils.hasLength(dateTimeFormat)) {
+			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "DateTime", dateTimeFormat));
+		}
+
+		if (!StringUtils.hasLength(dateFormat)) {
+			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Date", dateFormat));
+		}
+
+		if (!StringUtils.hasLength(numberFormat)) {
+			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Number", dateTimeFormat));
+		}
+
+		if (!numberFormat.startsWith("\"") || !numberFormat.endsWith("\"")) {
+			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Number", dateTimeFormat));
+		}
 	}
 
 	/**
@@ -166,6 +197,7 @@ public class RobotFormatCompare {
 	 *
 	 */
 	public void initializeCsvFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+		validate(dateTimeFormat, dateFormat, numberFormat);
 		verfierConfigs.put(CONFIG_CSV, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
 	}
 
@@ -183,6 +215,7 @@ public class RobotFormatCompare {
 	 *
 	 */
 	public void initializeXmlFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+		validate(dateTimeFormat, dateFormat, numberFormat);
 		verfierConfigs.put(CONFIG_XML, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
 	}
 
@@ -204,10 +237,13 @@ public class RobotFormatCompare {
 	public void compareJsonWithXML(String mapFilePath, String json, String xml) {
 		this.verifyConfig(CONFIG_JSON);
 		this.verifyConfig(CONFIG_XML);
-		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
+		getFormatComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
 				this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
 	}
 
+	FormatComparator getFormatComparator() {
+		return FormatComparator.createComparator();
+	}
 
     /**
      * Verify Csv With Xml
@@ -254,7 +290,7 @@ public class RobotFormatCompare {
 
 	private void verifyConfig(String formatKey) {
 		if (this.verfierConfigs.get(formatKey) == null) {
-			throw new RobotFormatCompareException("The format " + formatKey + " is not yet initialized.");
+			throw new RobotFormatCompareException(String.format("The format %s is not yet initialized.", formatKey));
 		}
 	}
 
