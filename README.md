@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/JeP42/robotframework-formatcompare.svg?branch=master)](https://travis-ci.org/JeP42/robotframework-formatcompare) [![Quality Gate](https://sonarqube.com/api/badges/gate?key=com.github.jep42:robotframework-formatcompare-reactor)](https://sonarqube.com/dashboard/index/com.github.jep42:robotframework-formatcompare-reactor)
+[![Build Status](https://travis-ci.org/JeP42/robotframework-formatcompare.svg?branch=master)](https://travis-ci.org/JeP42/robotframework-formatcompare) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jep42/robotframework-formatcompare/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jep42/robotframework-formatcompare)
+
+
 
 ## robotframework-formatcompare
 
