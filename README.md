@@ -52,7 +52,7 @@ Compare Download Formats JSON And XML
     ...
 ```
 
-The test case above references the mapfile `${TESTDATA}/json2xml.mapfile` which maps elements from a Json to elements of an XML structure:
+The test case above references the mapfile `${TESTDATA}/json2xml.mapfile` which maps elements from a Json (JSONPath expression) to elements of an XML (XPath expression) structure:
 
 ```
 $.data[0].firstname;Neverland/Persons/Person[1]/Firstname;STRING;=;;
@@ -73,7 +73,7 @@ Compare Download Formats CSV And XML
     ...
 ```
 
-The test case above references the mapfile `${TESTDATA}/csv2xml.mapfile` which maps elements from a CSV to elements of an XML structure:
+The test case above references the mapfile `${TESTDATA}/csv2xml.mapfile` which maps elements from a CSV (EasyCSVMap selector expression) to elements of an XML (XPath expression) structure:
 
 ```
 {1}.firstname;Neverland/Persons/Person[1]/Firstname;STRING;=;;
