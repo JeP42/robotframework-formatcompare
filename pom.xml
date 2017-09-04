@@ -3,7 +3,7 @@
 
   <groupId>com.github.jep42</groupId>
   <artifactId>robotframework-formatcompare-reactor</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.2</version>
 
 
   <packaging>pom</packaging>
@@ -122,7 +122,7 @@
     <url>https://github.com/JeP42/robotframework-formatcompare</url>
     <connection>scm:git:git@github.com:JeP42/robotframework-formatcompare.git</connection>
     <developerConnection>scm:git:git@github.com:JeP42/robotframework-formatcompare.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>robotframework-formatcompare-reactor-0.0.2</tag>
   </scm>
 
   <issueManagement>
