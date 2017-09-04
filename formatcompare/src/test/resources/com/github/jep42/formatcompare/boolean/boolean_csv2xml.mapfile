@@ -1,0 +1,9 @@
+{1}.isPO;Order/Positions/Position[1]/isPO;BOOLEAN;=;;
+{1}.isDelivered;Order/Positions/Position[1]/isDelivered;BOOLEAN;=;;
+{1}.isInvoiced;Order/Positions/Position[1]/isInvoiced;BOOLEAN;=;;
+{1}.isA;Order/Positions/Position[1]/isA;BOOLEAN;=;;
+{1}.isB;Order/Positions/Position[1]/isB;BOOLEAN;=;;
+{1}.isC;Order/Positions/Position[1]/isC;BOOLEAN;=;;
+{1}.isD;Order/Positions/Position[1]/isD;BOOLEAN;=;;
+{1}.isE;Order/Positions/Position[1]/isE;BOOLEAN;=;;
+{1}.isF;Order/Positions/Position[1]/isF;BOOLEAN;!=;;

@@ -1,0 +1,9 @@
+$.data[0].isPO;Order/Positions/Position[1]/isPO;BOOLEAN;=;;
+$.data[0].isDelivered;Order/Positions/Position[1]/isDelivered;BOOLEAN;=;;
+$.data[0].isInvoiced;Order/Positions/Position[1]/isInvoiced;BOOLEAN;=;;
+$.data[0].isA;Order/Positions/Position[1]/isA;BOOLEAN;=;;
+$.data[0].isB;Order/Positions/Position[1]/isB;BOOLEAN;=;;
+$.data[0].isC;Order/Positions/Position[1]/isC;BOOLEAN;=;;
+$.data[0].isD;Order/Positions/Position[1]/isD;BOOLEAN;=;;
+$.data[0].isE;Order/Positions/Position[1]/isE;BOOLEAN;=;;
+$.data[0].isF;Order/Positions/Position[1]/isF;BOOLEAN;!=;;

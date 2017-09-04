@@ -1,6 +1,7 @@
 package com.github.jep42.formatcompare.elementcomparator;
 
 import com.github.jep42.formatcompare.elementcomparator.api.ElementComparator;
+import com.github.jep42.formatcompare.elementcomparator.impl.BooleanElementComparatorImpl;
 import com.github.jep42.formatcompare.elementcomparator.impl.DateElementComparatorImpl;
 import com.github.jep42.formatcompare.elementcomparator.impl.DateTimeElementComparatorImpl;
 import com.github.jep42.formatcompare.elementcomparator.impl.DecimalElementComparatorImpl;
@@ -13,24 +14,26 @@ import com.github.jep42.formatcompare.util.FormatComparatorException;
 
 public final class ElementComparatorFactory {
 
-	private ElementComparatorFactory() {
-		super();
-	}
+    private ElementComparatorFactory() {
+        super();
+    }
 
-	public static ElementComparator getElementComparatorFor(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
-		if (FieldType.STRING.equals(mapping.getFieldType())) {
-			return new StringElementComparatorImpl(mapping, master, slave);
-		} else if (FieldType.DATETIME.equals(mapping.getFieldType())) {
-			return new DateTimeElementComparatorImpl(mapping, master, slave);
-		} else if (FieldType.DATE.equals(mapping.getFieldType())) {
-			return new DateElementComparatorImpl(mapping, master, slave);
-		} else if (FieldType.DECIMAL.equals(mapping.getFieldType())) {
-			return new DecimalElementComparatorImpl(mapping, master, slave);
-		} else if (FieldType.INTEGER.equals(mapping.getFieldType())) {
-			return new IntegerElementComparatorImpl(mapping, master, slave);
-		} else {
-        	throw new FormatComparatorException("Mapping type '" + mapping.getFieldType().toString() + "' is not supported.");
+    public static ElementComparator getElementComparatorFor(FieldMapping mapping, FormatHandler master, FormatHandler slave) {
+        if (FieldType.STRING.equals(mapping.getFieldType())) {
+            return new StringElementComparatorImpl(mapping, master, slave);
+        } else if (FieldType.DATETIME.equals(mapping.getFieldType())) {
+            return new DateTimeElementComparatorImpl(mapping, master, slave);
+        } else if (FieldType.DATE.equals(mapping.getFieldType())) {
+            return new DateElementComparatorImpl(mapping, master, slave);
+        } else if (FieldType.DECIMAL.equals(mapping.getFieldType())) {
+            return new DecimalElementComparatorImpl(mapping, master, slave);
+        } else if (FieldType.INTEGER.equals(mapping.getFieldType())) {
+            return new IntegerElementComparatorImpl(mapping, master, slave);
+        } else if (FieldType.BOOLEAN.equals(mapping.getFieldType())) {
+            return new BooleanElementComparatorImpl(mapping, master, slave);
+        } else {
+            throw new FormatComparatorException("Mapping type '" + mapping.getFieldType().toString() + "' is not supported.");
         }
-	}
+    }
 
 }

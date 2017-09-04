@@ -1,0 +1,14 @@
+{
+  "data": [{
+      "isPO": "1",
+      "isDelivered": true,
+      "isInvoiced": "True",
+      "isA": 1,
+      "isB": false,
+      "isC": "FALSE",
+      "isD": 0,
+      "isE": "0",
+      "isF": "0"
+  }]
+}
+

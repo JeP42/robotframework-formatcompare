@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Order>
+    <Header>
+      <number>4711</number>
+      <time>20110804113214</time>
+      <type>OTHER</type>
+    </Header>
+    <Positions>
+      <Position>
+        <isPO>true</isPO>
+        <isDelivered>TRUE</isDelivered>
+        <isInvoiced>1</isInvoiced>
+        <isA>true</isA>
+        <isB>0</isB>
+        <isC>false</isC>
+        <isD>FALSE</isD>
+        <isE>false</isE>
+        <isF>true</isF>
+      </Position>
+    </Positions>
+  </Order>
+</Root>

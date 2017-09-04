@@ -7,16 +7,18 @@ import com.github.jep42.formatcompare.util.UserContext;
 
 public interface FormatHandler {
 
-	UserContext getUserContext();
+    UserContext getUserContext();
 
-	String getStringValueWith(String selector);
+    String getStringValueWith(String selector);
 
-	Date getDateValueWith(String selector);
+    Date getDateValueWith(String selector);
 
-	Date getDateTimeValueWith(String masterSelector);
+    Date getDateTimeValueWith(String masterSelector);
 
-	BigDecimal getDecimalValueWith(String selector);
+    BigDecimal getDecimalValueWith(String selector);
 
-	Integer getIntegerValueWith(String selector);
+    Integer getIntegerValueWith(String selector);
+
+    Boolean getBooleanValueWith(String selector);
 
 }
