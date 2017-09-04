@@ -22,12 +22,20 @@ public class BooleanAsserterImpl implements ValueAsserter<Boolean> {
     }
 
     private void checkUnequal(Boolean masterValue, Boolean slaveValue, String condition) throws AssertionException {
+        validateValues(masterValue, slaveValue);
         if (masterValue.equals(slaveValue)) {
             throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
         }
     }
 
+    private void validateValues(Boolean masterValue, Boolean slaveValue) throws AssertionException {
+        if (masterValue == null || slaveValue == null) {
+            throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_NOT_POSSIBLE, masterValue, slaveValue));
+        }
+    }
+
     private void checkEqual(Boolean masterValue, Boolean slaveValue, String condition) throws AssertionException {
+        validateValues(masterValue, slaveValue);
         if (!masterValue.equals(slaveValue)) {
             throw new AssertionException(String.format(ValueAsserterMessages.ASSERTION_FAILED_MESSAGE, masterValue, condition, slaveValue));
         }
