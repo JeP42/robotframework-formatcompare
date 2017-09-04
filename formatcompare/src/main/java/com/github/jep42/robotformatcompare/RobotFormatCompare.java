@@ -46,6 +46,7 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  * | DECIMAL | Compares values as decimal values considering the given decimal number format pattern |
  * | DATE | Compares values as date values considering the given date pattern |
  * | DATETIME | Compares values as date values considering the given date-time pattern |
+ * | BOOLEAN | Compares values as boolean values with support for different notations: The strings "1" and "true" (case insensitive) are interpreted as boolean _true_, other values are interpreted as boolean _false_ |
  *
  * === Condition ===
  *
@@ -55,7 +56,7 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  * _Conditions for data type *STRING*_
  *
  * | =Compare operation= | =Meaning= | =Description= |
- * | = | equal | values are checked to be equal (case sensitive) |
+ * | _=_ | equal | values are checked to be equal (case sensitive) |
  * | != | unequal | values are checked to be unequal |
  * | & | contains | the value of the master element must contain the element of the slave element. Therefore, the slave value is a substring of the master value. |
  * | $ | contained | the value of the slave element must contain the element of the master element. Therefore, the master value is a substring of the slave value. |
@@ -64,7 +65,7 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  * _Conditions for numeric data types *DECIMAL* and *INTEGER*_
  *
  * | =Compare operation= | =Meaning= | =Description= |
- * | = | equal | values are checked to be equal |
+ * | _=_ | equal | values are checked to be equal |
  * | != | unequal | values are checked to be unequal |
  * | < | smaller | The master value is checked to be smaller than the slave value (master < slave) |
  * | > | greater | The master value is checked to be greater than the slave value (master > slave) |
@@ -73,10 +74,16 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  * _Conditions for date data types *DATE* and *DATETIME*_
  *
  * | =Compare operation= | =Meaning= | =Description= |
- * | = | equal | Both date values are checked to be equal considering the given date pattern |
+ * | _=_ | equal | Both date values are checked to be equal considering the given date pattern |
  * | < | before | The master date value is checked to be before the slave slave date value (master < slave) |
  * | > | after | The master date value is checked to be after the slave value (master > slave) |
  *
+ *
+ * _Conditions for data type *BOOLEAN*_
+ *
+ * | =Compare operation= | =Meaning= | =Description= |
+ * | _=_ | equal | values are checked to be equal |
+ * | != | unequal | values are checked to be unequal |
  *
  * === Options ===
  *
@@ -117,255 +124,255 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  */
 public class RobotFormatCompare {
 
-	private static final String MESSAGE_INVALID_PATTERN = "The given %s pattern is invalid: %s";
+    private static final String MESSAGE_INVALID_PATTERN = "The given %s pattern is invalid: %s";
 
-	public static final String ROBOT_LIBRARY_VERSION = "0.1";
+    public static final String ROBOT_LIBRARY_VERSION = "0.1";
 
-	public static final String ROBOT_LIBRARY_SCOPE = "GLOBAL";
+    public static final String ROBOT_LIBRARY_SCOPE = "GLOBAL";
 
-	static final String NUMBERFORMAT = "NUMBERFORMAT";
+    static final String NUMBERFORMAT = "NUMBERFORMAT";
 
-	static final String DATEFORMAT = "DATEFORMAT";
+    static final String DATEFORMAT = "DATEFORMAT";
 
-	static final String DATETIMEFORMAT = "DATETIMEFORMAT";
+    static final String DATETIMEFORMAT = "DATETIMEFORMAT";
 
-	static final String TIMEZONE = "TIMEZONE";
+    static final String TIMEZONE = "TIMEZONE";
 
-	static final String CONFIG_JSON = "JSON";
+    static final String CONFIG_JSON = "JSON";
 
-	static final String CONFIG_CSV = "CSV";
+    static final String CONFIG_CSV = "CSV";
 
-	static final String CONFIG_XML = "XMl";
+    static final String CONFIG_XML = "XMl";
 
-	Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
+    Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
 
-	/**
-	 * Initialize Json format handler
-	 *
-	 * Arguments:
-	 * - _timezone_: User timezone to parse date strings.
-	 * - _dateTimeFormat_: Datetime format pattern
-	 * - _dateFormat_: Date format pattern
-	 * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
-	 *
-	 * Example:
-	 * | Initialize Json Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
-	 *
-	 */
-	public void initializeJsonFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
-		validate(dateTimeFormat, dateFormat, numberFormat);
-		verfierConfigs.put(CONFIG_JSON, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
-	}
+    /**
+     * Initialize Json format handler
+     *
+     * Arguments:
+     * - _timezone_: User timezone to parse date strings.
+     * - _dateTimeFormat_: Datetime format pattern
+     * - _dateFormat_: Date format pattern
+     * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
+     *
+     * Example:
+     * | Initialize Json Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+     *
+     */
+    public void initializeJsonFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+        validate(dateTimeFormat, dateFormat, numberFormat);
+        verfierConfigs.put(CONFIG_JSON, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
+    }
 
 
-	/**
-	 * Simple validation of format patterns
-	 *
-	 * @param dateTimeFormat
-	 * @param dateFormat
-	 * @param numberFormat
-	 */
-	private void validate(String dateTimeFormat, String dateFormat, String numberFormat) {
-		if (!StringUtils.hasLength(dateTimeFormat)) {
-			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "DateTime", dateTimeFormat));
-		}
+    /**
+     * Simple validation of format patterns
+     *
+     * @param dateTimeFormat
+     * @param dateFormat
+     * @param numberFormat
+     */
+    private void validate(String dateTimeFormat, String dateFormat, String numberFormat) {
+        if (!StringUtils.hasLength(dateTimeFormat)) {
+            throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "DateTime", dateTimeFormat));
+        }
 
-		if (!StringUtils.hasLength(dateFormat)) {
-			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Date", dateFormat));
-		}
+        if (!StringUtils.hasLength(dateFormat)) {
+            throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Date", dateFormat));
+        }
 
-		if (!StringUtils.hasLength(numberFormat)) {
-			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Number", dateTimeFormat));
-		}
+        if (!StringUtils.hasLength(numberFormat)) {
+            throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Number", dateTimeFormat));
+        }
 
-		if (!numberFormat.startsWith("\"") || !numberFormat.endsWith("\"")) {
-			throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Number", dateTimeFormat));
-		}
-	}
+        if (!numberFormat.startsWith("\"") || !numberFormat.endsWith("\"")) {
+            throw new RobotFormatCompareException(String.format(MESSAGE_INVALID_PATTERN, "Number", dateTimeFormat));
+        }
+    }
 
-	/**
-	 * Initialize Csv format handler
-	 *
-	 * Arguments:
-	 * - _timezone_: User timezone to parse date strings.
-	 * - _dateTimeFormat_: Datetime format pattern
-	 * - _dateFormat_: Date format pattern
-	 * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
-	 *
-	 * Example:
-	 * | Initialize Csv Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
-	 *
-	 */
-	public void initializeCsvFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
-		validate(dateTimeFormat, dateFormat, numberFormat);
-		verfierConfigs.put(CONFIG_CSV, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
-	}
+    /**
+     * Initialize Csv format handler
+     *
+     * Arguments:
+     * - _timezone_: User timezone to parse date strings.
+     * - _dateTimeFormat_: Datetime format pattern
+     * - _dateFormat_: Date format pattern
+     * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
+     *
+     * Example:
+     * | Initialize Csv Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+     *
+     */
+    public void initializeCsvFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+        validate(dateTimeFormat, dateFormat, numberFormat);
+        verfierConfigs.put(CONFIG_CSV, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
+    }
 
-	/**
-	 * Initialize Xml format handler
-	 *
-	 * Arguments:
-	 * - _timezone_: User timezone to parse date strings.
-	 * - _dateTimeFormat_: Datetime format pattern
-	 * - _dateFormat_: Date format pattern
-	 * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
-	 *
-	 * Example:
-	 * | Initialize Xml Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
-	 *
-	 */
-	public void initializeXmlFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
-		validate(dateTimeFormat, dateFormat, numberFormat);
-		verfierConfigs.put(CONFIG_XML, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
-	}
+    /**
+     * Initialize Xml format handler
+     *
+     * Arguments:
+     * - _timezone_: User timezone to parse date strings.
+     * - _dateTimeFormat_: Datetime format pattern
+     * - _dateFormat_: Date format pattern
+     * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
+     *
+     * Example:
+     * | Initialize Xml Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+     *
+     */
+    public void initializeXmlFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+        validate(dateTimeFormat, dateFormat, numberFormat);
+        verfierConfigs.put(CONFIG_XML, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
+    }
 
-	/**
-	 *
-	 * Verify Json With Xml
-	 *
-	 * Arguments:
-	 * - _mapFilePath_: Path to the map file
-	 * - _json_: JSON object or path to JSON file
-	 * - _xml_: XML object or path to XML file
-	 *
-	 *
-	 * Example:
-	 * | Verify Json With XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
-	 *
-	 *
-	 */
-	public void compareJsonWithXML(String mapFilePath, String json, String xml) {
-		this.verifyConfig(CONFIG_JSON);
-		this.verifyConfig(CONFIG_XML);
-		getFormatComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
-				this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
-	}
+    /**
+     *
+     * Verify Json With Xml
+     *
+     * Arguments:
+     * - _mapFilePath_: Path to the map file
+     * - _json_: JSON object or path to JSON file
+     * - _xml_: XML object or path to XML file
+     *
+     *
+     * Example:
+     * | Verify Json With XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
+     *
+     *
+     */
+    public void compareJsonWithXML(String mapFilePath, String json, String xml) {
+        this.verifyConfig(CONFIG_JSON);
+        this.verifyConfig(CONFIG_XML);
+        getFormatComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
+                this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
+    }
 
-	FormatComparator getFormatComparator() {
-		return FormatComparator.createComparator();
-	}
+    FormatComparator getFormatComparator() {
+        return FormatComparator.createComparator();
+    }
 
     /**
      * Verify Csv With Xml
      *
      * Arguments:
-	 * - _mapFilePath_: Path to the map file
-	 * - _csv_: CSV object or path to CSV file
-	 * - _xml_: XML object or path to XML file
-	 * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
+     * - _mapFilePath_: Path to the map file
+     * - _csv_: CSV object or path to CSV file
+     * - _xml_: XML object or path to XML file
+     * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
      *
-	 *
-	 * Example:
-	 * | Verify Csv With XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml |
-	 *
+     *
+     * Example:
+     * | Verify Csv With XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml |
+     *
      */
-	public void compareCsvWithXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) {
-		this.verifyConfig(CONFIG_CSV);
-		this.verifyConfig(CONFIG_XML);
-		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
-				this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
-	}
+    public void compareCsvWithXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) {
+        this.verifyConfig(CONFIG_CSV);
+        this.verifyConfig(CONFIG_XML);
+        FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
+                this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
+    }
 
-	/**
-	 * Verify Csv With Json
-	 *
-	 * Arguments:
-	 * - _mapFilePath_: Path to the map file
-	 * - _csv_: CSV object or path to CSV file
-	 * - _json_: JSON object or path to JSON file
-	 * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
+    /**
+     * Verify Csv With Json
      *
-	 *
-	 * Example:
-	 * | Verify Csv With Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json |
-	 *
-	 */
-	public void compareCsvWithJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) {
-		this.verifyConfig(CONFIG_CSV);
-		this.verifyConfig(CONFIG_JSON);
-		FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
-				this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON));
-	}
+     * Arguments:
+     * - _mapFilePath_: Path to the map file
+     * - _csv_: CSV object or path to CSV file
+     * - _json_: JSON object or path to JSON file
+     * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
+     *
+     *
+     * Example:
+     * | Verify Csv With Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json |
+     *
+     */
+    public void compareCsvWithJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) {
+        this.verifyConfig(CONFIG_CSV);
+        this.verifyConfig(CONFIG_JSON);
+        FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
+                this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON));
+    }
 
 
-	private void verifyConfig(String formatKey) {
-		if (this.verfierConfigs.get(formatKey) == null) {
-			throw new RobotFormatCompareException(String.format("The format %s is not yet initialized.", formatKey));
-		}
-	}
+    private void verifyConfig(String formatKey) {
+        if (this.verfierConfigs.get(formatKey) == null) {
+            throw new RobotFormatCompareException(String.format("The format %s is not yet initialized.", formatKey));
+        }
+    }
 
-	private FormatHandler getFormatHandlerforJson(String json, String formatKey) {
-		return FormatHandlerFactory.getFormatHandlerForJson(this.getContent(json),
-				TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
-				this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
-				this.verfierConfigs.get(formatKey).get(DATEFORMAT),
-				this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
-	}
+    private FormatHandler getFormatHandlerforJson(String json, String formatKey) {
+        return FormatHandlerFactory.getFormatHandlerForJson(this.getContent(json),
+                TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
+                this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
+                this.verfierConfigs.get(formatKey).get(DATEFORMAT),
+                this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
+    }
 
-	private FormatHandler getFormatHandlerforXml(String xml, String formatKey) {
-		return FormatHandlerFactory.getFormatHandlerForXML(this.getContent(xml),
-				TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
-				this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
-				this.verfierConfigs.get(formatKey).get(DATEFORMAT),
-				this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
-	}
+    private FormatHandler getFormatHandlerforXml(String xml, String formatKey) {
+        return FormatHandlerFactory.getFormatHandlerForXML(this.getContent(xml),
+                TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
+                this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
+                this.verfierConfigs.get(formatKey).get(DATEFORMAT),
+                this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
+    }
 
-	private FormatHandler getFormatHandlerforCsv(String csv, String formatKey, int headerLineIndex) {
-		return FormatHandlerFactory.getFormatHandlerForCSV(this.getContent(csv), headerLineIndex,
-				TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
-				this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
-				this.verfierConfigs.get(formatKey).get(DATEFORMAT),
-				this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
-	}
+    private FormatHandler getFormatHandlerforCsv(String csv, String formatKey, int headerLineIndex) {
+        return FormatHandlerFactory.getFormatHandlerForCSV(this.getContent(csv), headerLineIndex,
+                TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
+                this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
+                this.verfierConfigs.get(formatKey).get(DATEFORMAT),
+                this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
+    }
 
 
-	/**
-	 * Incoming string is either file path where we can read content from or it already is content
-	 *
-	 * @param json
-	 * @return
-	 */
-	private String getContent(String json) {
-		String fileContent = json;
-		if (this.isValidFilePath(json)) {
-			fileContent  = this.loadFile(json);
-		}
-		return fileContent;
-	}
+    /**
+     * Incoming string is either file path where we can read content from or it already is content
+     *
+     * @param json
+     * @return
+     */
+    private String getContent(String json) {
+        String fileContent = json;
+        if (this.isValidFilePath(json)) {
+            fileContent  = this.loadFile(json);
+        }
+        return fileContent;
+    }
 
-	private boolean isValidFilePath(String json) {
-		try {
-			return Paths.get(json).toFile().exists();
-		} catch (InvalidPathException e) {
-			return false;
-		}
-	}
+    private boolean isValidFilePath(String json) {
+        try {
+            return Paths.get(json).toFile().exists();
+        } catch (InvalidPathException e) {
+            return false;
+        }
+    }
 
-	private Map<String, String> getAsMap(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
-		Map<String, String> map = new ConcurrentHashMap<>();
-		map.put(TIMEZONE, timezone);
-		map.put(DATETIMEFORMAT, dateTimeFormat);
-		map.put(DATEFORMAT, dateFormat);
-		//to support leading blank in format pattern the parameter numberFormat has to be enclosed in braces in robot test case. These braces have to be
-		//removed before passing the pattern string to the DataVerifier
-		map.put(NUMBERFORMAT, numberFormat.split("\"")[1]);
-		return map;
-	}
+    private Map<String, String> getAsMap(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+        Map<String, String> map = new ConcurrentHashMap<>();
+        map.put(TIMEZONE, timezone);
+        map.put(DATETIMEFORMAT, dateTimeFormat);
+        map.put(DATEFORMAT, dateFormat);
+        //to support leading blank in format pattern the parameter numberFormat has to be enclosed in braces in robot test case. These braces have to be
+        //removed before passing the pattern string to the DataVerifier
+        map.put(NUMBERFORMAT, numberFormat.split("\"")[1]);
+        return map;
+    }
 
-	private String loadFile(String filePath) {
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath)) ) {
-		    StringBuilder sb = new StringBuilder();
-		    String line = br.readLine();
+    private String loadFile(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath)) ) {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
 
-		    while (line != null) {
-		        sb.append(line);
-		        sb.append(System.lineSeparator());
-		        line = br.readLine();
-		    }
-		    return sb.toString();
-		} catch (IOException e) {
-			throw new RobotFormatCompareException(e);
-		}
-	}
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            return sb.toString();
+        } catch (IOException e) {
+            throw new RobotFormatCompareException(e);
+        }
+    }
 
 }
