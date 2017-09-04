@@ -20,7 +20,7 @@ use it with Python the library has to be imported as remote library (refer to th
 
 #### Jython
 
-- download latest robotframework-formatcompare-jar ([robotframework-formatcompare-0.0.1.jar](https://repo.maven.apache.org/maven2/com/github/jep42/robotframework-formatcompare/0.0.1/robotframework-formatcompare-0.0.1.jar))
+- download latest robotframework-formatcompare-jar ([robotframework-formatcompare-x.x.x.jar](https://repo.maven.apache.org/maven2/com/github/jep42/robotframework-formatcompare))
 - add the jar to classpath (as well as its dependencies)
 - import the library
 
@@ -31,7 +31,7 @@ Library    com.github.jep42.robotformatcompare.RobotFormatCompare
 
 #### Remote Library Server
 
-- download the remote-server-jar ([robotframework-formatcompare-remoteserver-0.0.1-jar-with-dependencies.jar](https://repo.maven.apache.org/maven2/com/github/jep42/robotframework-formatcompare-remoteserver/0.0.1/robotframework-formatcompare-remoteserver-0.0.1-jar-with-dependencies.jar))
+- download the remote-server-jar ([robotframework-formatcompare-remoteserver-x.x.x-jar-with-dependencies.jar](https://repo.maven.apache.org/maven2/com/github/jep42/robotframework-formatcompare-remoteserver/))
 - start it via command line ``java -jar <remote-server-jar> --port 8270``
 - import the library
 
@@ -41,7 +41,7 @@ Library    Remote    http://localhost:8270/RobotFormatCompare
 ```
 
 
-####Robot Testcase Sample: Compare JSON with XML
+#### Robot Testcase Sample: Compare JSON with XML
 
 
 ```
@@ -64,7 +64,7 @@ $.data[0].email;Neverland/Persons/Person[1]/Email2;STRING;!=;;
 $.data[0].sex;Neverland/Persons/Person[1]/Firstname;STRING;=;;
 ```
 
-####Robot Testcase Sample: Compare CSV with XML
+#### Robot Testcase Sample: Compare CSV with XML
 
 ```
 Compare Download Formats CSV And XML
