@@ -1,4 +1,4 @@
-package com.github.jep42.formatcompare.formathandler.impl;
+package com.github.jep42.formatcompare.formathandler.impl.json;
 
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;

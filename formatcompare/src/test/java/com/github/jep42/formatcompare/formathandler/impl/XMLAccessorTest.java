@@ -10,6 +10,7 @@ import org.xml.sax.SAXParseException;
 
 import com.github.jep42.formatcompare.UnitTestUtil;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandlerException;
+import com.github.jep42.formatcompare.formathandler.impl.xml.XMLAccessor;
 
 public class XMLAccessorTest {
 

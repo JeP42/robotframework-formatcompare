@@ -1,4 +1,4 @@
-package com.github.jep42.formatcompare.formathandler.impl;
+package com.github.jep42.formatcompare.formathandler.impl.xml;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

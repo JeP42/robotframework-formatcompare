@@ -7,7 +7,7 @@
 
 ### Description
 
-This library provides keywords to compare different data structures (csv, xml, json) via mapfiles. The mapfile specifies the elements which are compared with each other and defines certain rules for this compare operation.
+This library provides keywords to compare different data structures (csv, xml, json, xls(x)) via mapfiles. The mapfile specifies the elements which are compared with each other and defines certain rules for this compare operation.
 
 ### Keywords
 
@@ -92,6 +92,7 @@ The test case above references the mapfile `${TESTDATA}/csv2xml.mapfile` which m
 - org.slf4j:slf4j-api:1.7.21 ([Download](https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.21) from Maven Central)
 - com.github.jep42:robotframework-easycsvmap:0.0.2 ([Download](https://mvnrepository.com/artifact/com.github.jep42/robotframework-easycsvmap/0.0.2) from Maven Central)
 - com.jayway.jsonpath:json-path:2.2.0 ([Download](https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path/2.2.0) from Maven Central)
+- org.apache.poi:poi:3.17 ([Download](https://mvnrepository.com/artifact/org.apache.poi/poi/3.17) from Maven Central)
 - [only for sub-module remoteserver] com.github.ombre42:jrobotremoteserver:3.0 ([Download](https://mvnrepository.com/artifact/com.github.ombre42/jrobotremoteserver/3.0) from Maven Central)
 
 

@@ -1,0 +1,1 @@
+jython -Dpython.path=$JAVA_HOME/lib/tools.jar -m robot.libdoc --name RobotFormatCompare src/main/java/com/github/jep42/robotformatcompare/RobotFormatCompare.java ../docs/RobotFormatCompare.html

@@ -1,6 +1,7 @@
 package com.github.jep42.robotformatcompare;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
@@ -17,7 +18,7 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
 
 /**
  *
- * This library provides keywords to compare different data structures (csv, xml, json) via mapfiles.
+ * This library provides keywords to compare different data structures (csv, xml, json, xls(x)) via mapfiles.
  * The mapfile specifies the elements which are compared with each other and defines certain rules for this compare operation.
  *
  * == MapFile format ==
@@ -35,6 +36,7 @@ import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
  * | XML | XPath expression | https://www.w3.org/TR/xpath/ |
  * | JSON | JsonPath expression | http://goessner.net/articles/JsonPath/ |
  * | CSV | EasyCSVMap selector expression | https://github.com/JeP42/robotframework-easycsvmap |
+ * | XLS(X) | A simple selector string in the format <sheetindex>:<rowindex>:<columnindex> | --- |
  *
  * === Data Types ===
  *
@@ -142,7 +144,9 @@ public class RobotFormatCompare {
 
     static final String CONFIG_CSV = "CSV";
 
-    static final String CONFIG_XML = "XMl";
+    static final String CONFIG_XML = "XML";
+
+    static final String CONFIG_EXCEL = "EXCEL";
 
     Map<String, Map<String, String>> verfierConfigs = new ConcurrentHashMap<>();
 
@@ -164,6 +168,24 @@ public class RobotFormatCompare {
         verfierConfigs.put(CONFIG_JSON, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
     }
 
+
+    /**
+     * Initialize Excel format handler
+     *
+     * Arguments:
+     * - _timezone_: User timezone to parse date strings.
+     * - _dateTimeFormat_: Datetime format pattern
+     * - _dateFormat_: Date format pattern
+     * - _numberFormat_: Number format pattern for decimal values. More details about the decimal format pattern can be found at the top of the page.
+     *
+     * Example:
+     * | Initialize Excel Format Handler | GMT+01:00 | dd.MM.yyyy HH:mm:ss | dd.MM.yyyy | " ,2" |
+     *
+     */
+    public void initializeExcelFormatHandler(String timezone, String dateTimeFormat, String dateFormat, String numberFormat) {
+        validate(dateTimeFormat, dateFormat, numberFormat);
+        verfierConfigs.put(CONFIG_EXCEL, this.getAsMap(timezone, dateTimeFormat, dateFormat, numberFormat));
+    }
 
     /**
      * Simple validation of format patterns
@@ -228,7 +250,7 @@ public class RobotFormatCompare {
 
     /**
      *
-     * Verify Json With Xml
+     * Compare Json With Xml
      *
      * Arguments:
      * - _mapFilePath_: Path to the map file
@@ -237,7 +259,7 @@ public class RobotFormatCompare {
      *
      *
      * Example:
-     * | Verify Json With XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
+     * | Compare Json With XML | ./data.mapfile | ${jsonObject} | ${TEMPDIR}/download.xml |
      *
      *
      */
@@ -253,7 +275,7 @@ public class RobotFormatCompare {
     }
 
     /**
-     * Verify Csv With Xml
+     * Compare Csv With Xml
      *
      * Arguments:
      * - _mapFilePath_: Path to the map file
@@ -263,7 +285,7 @@ public class RobotFormatCompare {
      *
      *
      * Example:
-     * | Verify Csv With XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml |
+     * | Compare Csv With XML | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.xml | 0 |
      *
      */
     public void compareCsvWithXML(String mapFilePath, String csv, String xml, int csvHeaderLineIndex) {
@@ -274,7 +296,72 @@ public class RobotFormatCompare {
     }
 
     /**
-     * Verify Csv With Json
+     * Compare Excel With Xml
+     *
+     * Arguments:
+     * - _mapFilePath_: Path to the map file
+     * - _pathToExcel_: Path to Excel file (xls, slsx)
+     * - _xml_: XML object or path to XML file
+     *
+     *
+     * Example:
+     * | Compare Excel With XML | ./data.mapfile | ${TEMPDIR}/uploadfile.xls | ${TEMPDIR}/download.xml |
+     *
+     */
+    public void compareExcelWithXML(String mapFilePath, String pathToExcel, String xml) {
+        this.verifyConfig(CONFIG_EXCEL);
+        this.verifyConfig(CONFIG_XML);
+        FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforExcel(pathToExcel, CONFIG_EXCEL),
+                this.getFormatHandlerforXml(this.getContent(xml), CONFIG_XML));
+    }
+    
+    
+    
+    /**
+     * Compare Csv With Excel
+     *
+     * Arguments:
+     * - _mapFilePath_: Path to the map file
+     * - _csv_: CSV object or path to CSV file
+     * - _pathToExcel_: Path to Excel file (xls, slsx)
+     * - _csvHeaderLineIndex_: Index of the CSV header line. Set to -1 if the CSV does not contain a header line.
+     *
+     *
+     * Example:
+     * | Compare Csv With Excel | ./data.mapfile | ${csvObject} | ${TEMPDIR}/uploadfile.xls | 0 |
+     *
+     */
+    public void compareCsvWithExcel(String mapFilePath, String csv, String pathToExcel, int csvHeaderLineIndex) {
+        this.verifyConfig(CONFIG_CSV);
+        this.verifyConfig(CONFIG_EXCEL);
+        FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforCsv(this.getContent(csv), CONFIG_CSV, csvHeaderLineIndex),
+                this.getFormatHandlerforExcel(pathToExcel, CONFIG_EXCEL));
+    }
+    
+    /**
+     * Compare Json With Excel
+     *
+     * Arguments:
+     * - _mapFilePath_: Path to the map file
+     * - _csv_: CSV object or path to CSV file
+     * - _pathToExcel_: Path to Excel file (xls, slsx)
+     *
+     *
+     * Example:
+     * | Compare Json With Excel | ./data.mapfile | ${TEMPDIR}/download.json | ${TEMPDIR}/uploadfile.xls |
+     *
+     */
+    public void compareJsonWithExcel(String mapFilePath, String json, String pathToExcel) {
+        this.verifyConfig(CONFIG_JSON);
+        this.verifyConfig(CONFIG_EXCEL);
+        FormatComparator.createComparator().compare(mapFilePath, this.getFormatHandlerforJson(this.getContent(json), CONFIG_JSON),
+                this.getFormatHandlerforExcel(pathToExcel, CONFIG_EXCEL));
+    }
+    
+    
+    
+    /**
+     * Compare Csv With Json
      *
      * Arguments:
      * - _mapFilePath_: Path to the map file
@@ -284,7 +371,7 @@ public class RobotFormatCompare {
      *
      *
      * Example:
-     * | Verify Csv With Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json |
+     * | Compare Csv With Json | ./data.mapfile | ${csvObject} | ${TEMPDIR}/download.json | 0 |
      *
      */
     public void compareCsvWithJson(String mapFilePath, String csv, String json, int csvHeaderLineIndex) {
@@ -295,10 +382,23 @@ public class RobotFormatCompare {
     }
 
 
+
+    
+
+
+
     private void verifyConfig(String formatKey) {
         if (this.verfierConfigs.get(formatKey) == null) {
             throw new RobotFormatCompareException(String.format("The format %s is not yet initialized.", formatKey));
         }
+    }
+
+    private FormatHandler getFormatHandlerforExcel(String excelpath, String formatKey) {
+        return FormatHandlerFactory.getFormatHandlerForExcel(new File(excelpath),
+                TimeZone.getTimeZone(this.verfierConfigs.get(formatKey).get(TIMEZONE)),
+                this.verfierConfigs.get(formatKey).get(DATETIMEFORMAT),
+                this.verfierConfigs.get(formatKey).get(DATEFORMAT),
+                this.verfierConfigs.get(formatKey).get(NUMBERFORMAT));
     }
 
     private FormatHandler getFormatHandlerforJson(String json, String formatKey) {

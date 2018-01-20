@@ -1,0 +1,9 @@
+0:0:0;Order/Positions/Position[1]/isPO;BOOLEAN;=;;
+0:0:1;Order/Positions/Position[1]/isDelivered;BOOLEAN;=;;
+0:0:2;Order/Positions/Position[1]/isInvoiced;BOOLEAN;=;;
+0:0:3;Order/Positions/Position[1]/isA;BOOLEAN;=;;
+0:0:4;Order/Positions/Position[1]/isB;BOOLEAN;=;;
+0:0:5;Order/Positions/Position[1]/isC;BOOLEAN;=;;
+0:0:6;Order/Positions/Position[1]/isD;BOOLEAN;=;;
+0:0:7;Order/Positions/Position[1]/isE;BOOLEAN;=;;
+0:0:8;Order/Positions/Position[1]/isF;BOOLEAN;!=;;

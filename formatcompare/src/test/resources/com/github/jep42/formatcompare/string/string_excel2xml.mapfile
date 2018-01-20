@@ -1,0 +1,4 @@
+0:0:0;Order/Header/Number;STRING;=;;
+0:0:1;Order/Header/Number;STRING;!=;;
+0:0:2;Order/Header/Number;STRING;&;;
+0:0:3;Order/Header/Number;STRING;$;;

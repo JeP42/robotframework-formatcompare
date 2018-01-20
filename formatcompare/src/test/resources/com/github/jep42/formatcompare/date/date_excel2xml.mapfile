@@ -1,0 +1,7 @@
+0:0:0;Order/Positions/Position[1]/DeliveryDate;DATE;=;;
+0:0:1;Order/Positions/Position[1]/DeliveryDate;DATE;>;;
+0:0:2;Order/Positions/Position[1]/DeliveryDate;DATE;<;;
+0:0:3;Order/Positions/Position[1]/DeliveryDate;DATETIME;<;;SETTIMETOENDOFDAY
+0:0:4;Order/Header/Time;DATETIME;=;;
+0:0:5;Order/Header/Time;DATETIME;>;;
+0:0:6;Order/Header/Time;DATETIME;<;;

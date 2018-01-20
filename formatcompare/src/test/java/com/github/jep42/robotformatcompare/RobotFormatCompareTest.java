@@ -21,6 +21,11 @@ public class RobotFormatCompareTest {
 	public void initializeXmlFormatHandler() {
 		this.initializeFormatHandler(RobotFormatCompare.CONFIG_XML);
 	}
+	
+	@Test
+	public void initializeExcelFormatHandler() {
+		this.initializeFormatHandler(RobotFormatCompare.CONFIG_EXCEL);
+	}
 
 	private void initializeFormatHandler(String formatId) {
 		String timezone = "GMT+01:00";
@@ -36,6 +41,8 @@ public class RobotFormatCompareTest {
 			r.initializeJsonFormatHandler(timezone, dateTimeFormat, dateFormat, numberFormatWithBraces);
 		} else if (RobotFormatCompare.CONFIG_XML.contentEquals(formatId)) {
 			r.initializeXmlFormatHandler(timezone, dateTimeFormat, dateFormat, numberFormatWithBraces);
+		} else if (RobotFormatCompare.CONFIG_EXCEL.contentEquals(formatId)) {
+			r.initializeExcelFormatHandler(timezone, dateTimeFormat, dateFormat, numberFormatWithBraces);
 		}
 
 		assertEquals(timezone, r.verfierConfigs.get(formatId).get(RobotFormatCompare.TIMEZONE));
@@ -44,7 +51,8 @@ public class RobotFormatCompareTest {
 		//number format is saved without enclosing braces
 		assertEquals(numberFormat, r.verfierConfigs.get(formatId).get(RobotFormatCompare.NUMBERFORMAT));
 	}
-
+	
+	
 	@Test
 	public void compareJsonWithXML_missingJsonConfig() {
 		compareJsonWithXML_missingConfig(RobotFormatCompare.CONFIG_JSON);
@@ -142,4 +150,38 @@ public class RobotFormatCompareTest {
 			assertEquals("The format " + missingFormatId + " is not yet initialized.", e.getMessage());
 		}
 	}
+	
+	
+	@Test
+	public void compareExcelWithXML_missingExcelConfig() {
+		compareExcelWithXML_missingConfig(RobotFormatCompare.CONFIG_EXCEL);
+	}
+
+	@Test
+	public void compareExcelWithXML_missingXmlConfig() {
+		compareExcelWithXML_missingConfig(RobotFormatCompare.CONFIG_XML);
+	}
+
+	private void compareExcelWithXML_missingConfig(String missingFormatId) {
+		String timezone = "GMT+01:00";
+		String dateTimeFormat = "dtf";
+		String dateFormat = "tf";
+		String numberFormatWithBraces = "\"nf\"";
+
+		RobotFormatCompare r = new RobotFormatCompare();
+
+		if (RobotFormatCompare.CONFIG_EXCEL.contentEquals(missingFormatId)) {
+			r.initializeXmlFormatHandler(timezone, dateTimeFormat, dateFormat, numberFormatWithBraces);
+		} else if (RobotFormatCompare.CONFIG_XML.contentEquals(missingFormatId)) {
+			r.initializeExcelFormatHandler(timezone, dateTimeFormat, dateFormat, numberFormatWithBraces);
+		}
+
+		try {
+			r.compareExcelWithXML("/path/to/map.file", "/path/to/excel.xlsx", "xml");
+		} catch (RobotFormatCompareException e) {
+			assertEquals("The format " + missingFormatId + " is not yet initialized.", e.getMessage());
+		}
+	}
+	
+	
 }

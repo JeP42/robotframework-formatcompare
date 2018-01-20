@@ -1,4 +1,4 @@
-package com.github.jep42.formatcompare.formathandler.impl;
+package com.github.jep42.formatcompare.formathandler.impl.json;
 
 import java.math.BigDecimal;
 import java.text.ParseException;

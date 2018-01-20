@@ -1,0 +1,8 @@
+0:0:0;Order/Positions/Position[1]/Price;DECIMAL;=;;
+0:0:1;Order/Positions/Position[1]/Price;DECIMAL;!=;;
+0:0:2;Order/Positions/Position[1]/Price;DECIMAL;<;;
+0:0:3;Order/Positions/Position[1]/Price;DECIMAL;>;;
+0:0:4;Order/Positions/Position[1]/Quantity;INTEGER;=;;
+0:0:5;Order/Positions/Position[1]/Quantity;INTEGER;!=;;
+0:0:6;Order/Positions/Position[1]/Quantity;INTEGER;<;;
+0:0:7;Order/Positions/Position[1]/Quantity;INTEGER;>;;
