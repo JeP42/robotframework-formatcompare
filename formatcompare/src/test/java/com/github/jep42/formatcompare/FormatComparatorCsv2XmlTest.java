@@ -6,8 +6,11 @@ import java.util.TimeZone;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 import com.github.jep42.formatcompare.formathandler.FormatHandlerFactory;
 import com.github.jep42.formatcompare.formathandler.api.FormatHandler;
+import com.github.jep42.formatcompare.util.FormatComparatorException;
 
 
 public class FormatComparatorCsv2XmlTest {
@@ -67,6 +70,36 @@ public class FormatComparatorCsv2XmlTest {
         FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_CSV, DATE_FORMAT_PATTERN_DE_CSV, NUMBER_FORMAT_PATTERN_DE_CSV);
 
         FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+    }
+    
+    
+    
+    @Test
+    public void verify_csv2xml_dateformat() throws Exception {
+        String csvString = UnitTestUtil.getFile("com/github/jep42/formatcompare/date/dateformat_test.csv");
+        String xmlString = UnitTestUtil.getFile("com/github/jep42/formatcompare/date/date_test.xml");
+        String mapFilePath = this.getMapFilePath("com/github/jep42/formatcompare/date/date_csv2xml.mapfile");
+
+        FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
+        FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), "dd.MM.yyyy HH:mm:ss", "dd.MM.yyyy", NUMBER_FORMAT_PATTERN_DE_CSV);
+
+        FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+    }
+    
+    @Test
+    public void verify_csv2xml_invaliddateformat() throws Exception {
+        String csvString = UnitTestUtil.getFile("com/github/jep42/formatcompare/date/invaliddateformat_test.csv");
+        String xmlString = UnitTestUtil.getFile("com/github/jep42/formatcompare/date/date_test.xml");
+        String mapFilePath = this.getMapFilePath("com/github/jep42/formatcompare/date/date_csv2xml.mapfile");
+
+        FormatHandler formatHandlerForXML = FormatHandlerFactory.getFormatHandlerForXML(xmlString, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), DATE_TIME_FORMAT_PATTERN_DE_XML, DATE_FORMAT_PATTERN_DE_XML, NUMBER_FORMAT_PATTERN_DE_XML);
+        FormatHandler formatHandlerForCSV = FormatHandlerFactory.getFormatHandlerForCSV(csvString, 0, TimeZone.getTimeZone(TIMEZONE_PLUS_ONE_SHORT), "dd.MM.yyyy HH:mm:ss", "dd.MM.yyyy", NUMBER_FORMAT_PATTERN_DE_CSV);
+        try {
+        	FormatComparator.createComparator().compare(mapFilePath, formatHandlerForCSV, formatHandlerForXML);
+        } catch (FormatComparatorException e) {
+        	assertTrue(e.getMessage().contains("Unparseable date: \"32.02.2011\""));
+        }
+        
     }
 
 

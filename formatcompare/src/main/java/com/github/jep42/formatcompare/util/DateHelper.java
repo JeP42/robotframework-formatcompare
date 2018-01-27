@@ -20,6 +20,7 @@ public final class DateHelper {
 
 	private static long getTimestamp(String dateValue, String pattern, TimeZone timezone) throws ParseException {
 		DateFormat d = new SimpleDateFormat(pattern);
+		d.setLenient(false);
 		Calendar c = Calendar.getInstance(timezone);
 		c.setTime(d.parse(dateValue));
 		return c.getTimeInMillis();
